@@ -39,12 +39,16 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody @Valid LoginDto loginDto) {
+
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getEmail(), loginDto.getPassword()));
+
         User loginUser = userService.getUserByEmail(loginDto.getEmail());
         UserPrincipal userPrincipal = new UserPrincipal(loginUser);
+
         HttpHeaders newHttpHeaders = new HttpHeaders();
         newHttpHeaders.add(AppConstants.TOKEN_HEADER, jwtTokenService.generateToken(userPrincipal));
+        
         return new ResponseEntity<>(loginUser, newHttpHeaders, HttpStatus.OK);
     }
 }
