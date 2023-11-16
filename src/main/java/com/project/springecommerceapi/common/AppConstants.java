@@ -18,12 +18,6 @@ public class AppConstants {
     public static final String EMAIL_EXISTS = "User exists with this email address.";
     public static final String OPTIONS_HTTP_METHOD = "options";
     public static final String TOKEN_PREFIX = "Bearer ";
-    public static final String[] PUBLIC_URLS = {
-            "/api/v1/auth/signup",
-            "/api/v1/auth/login",
-            "/api/v1/user/{userId}",
-            
-    };
 
     public static final String EMAIL_PATTERN = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
     public static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>.]).{6,32}$";

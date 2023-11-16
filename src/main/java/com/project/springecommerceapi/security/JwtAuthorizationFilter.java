@@ -50,10 +50,13 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             if (jwtTokenService.isTokenValid(email, token) &&
                     SecurityContextHolder.getContext().getAuthentication() == null) {
 
+                // Comprobar si existe el usuario en la actualidad
                 UserDetails userDetails = userDetailService.loadUserByUsername(email);
 
+                List<GrantedAuthority> authorities = jwtTokenService.getAuthoritiesFromToken(token);
+
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email,
-                        userDetails.getPassword(), userDetails.getAuthorities());
+                        null, authorities);
 
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
