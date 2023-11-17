@@ -39,6 +39,9 @@ public class Cart {
     private Date dateCreated;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
+    private Date dateLastModified;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private Date dateExpiration;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.REMOVE)

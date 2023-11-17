@@ -2,6 +2,7 @@ package com.project.springecommerceapi.common;
 
 public class AppConstants {
     public static final Long JWT_EXPIRATION_2Wk = 14 * 86400000L; // 2 Weeks
+    public static final Long CART_EXPIRATION_4Wk = 28 * 86400000L; // 4 Weeks
     public static final String AUTHORITIES = "authorities";
     public static final String TOKEN_UNVERIFIABLE = "Token cannot be verified.";
     public static final String TOKEN_HEADER = "Jwt-Token";
@@ -27,6 +28,7 @@ public class AppConstants {
     public static final String PRODUCT_NOT_FOUND = "No product found.";
     public static final String COLOR_PRODUCT_VARIANT_NOT_FOUND = "No color product variant found.";
     public static final String SIZE_COLOR_PRODUCT_VARIANT_NOT_FOUND = "No size color product variant found.";
+    public static final String CART_NOT_FOUND = "No cart found.";
 
     public static final String SLUG_EXISTS = "Slug already exists.";
     public static final String HEXCODE_EXISTS = "Hexcode already exists.";
