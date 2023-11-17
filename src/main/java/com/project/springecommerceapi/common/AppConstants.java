@@ -29,6 +29,7 @@ public class AppConstants {
     public static final String COLOR_PRODUCT_VARIANT_NOT_FOUND = "No color product variant found.";
     public static final String SIZE_COLOR_PRODUCT_VARIANT_NOT_FOUND = "No size color product variant found.";
     public static final String CART_NOT_FOUND = "No cart found.";
+    public static final String CART_ITEM_NOT_FOUND = "No cart item found.";
 
     public static final String SLUG_EXISTS = "Slug already exists.";
     public static final String HEXCODE_EXISTS = "Hexcode already exists.";

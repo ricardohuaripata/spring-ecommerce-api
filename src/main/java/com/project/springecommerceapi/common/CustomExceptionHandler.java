@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.project.springecommerceapi.error.ValidationError;
+import com.project.springecommerceapi.exceptions.CartItemNotFoundException;
 import com.project.springecommerceapi.exceptions.CartNotFoundException;
 import com.project.springecommerceapi.exceptions.CategoryNotFoundException;
 import com.project.springecommerceapi.exceptions.ColorNotFoundException;
@@ -161,6 +162,11 @@ public class CustomExceptionHandler {
     @ExceptionHandler(CartNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleCartNotFoundException(CartNotFoundException e) {
         return buildErrorResponse(HttpStatus.NOT_FOUND, AppConstants.CART_NOT_FOUND, null);
+    }
+
+    @ExceptionHandler(CartItemNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleCartItemNotFoundException(CartItemNotFoundException e) {
+        return buildErrorResponse(HttpStatus.NOT_FOUND, AppConstants.CART_ITEM_NOT_FOUND, null);
     }
 
     // EXISTS EXCEPTIONS
