@@ -36,4 +36,6 @@ public class AppConstants {
     public static final String COLOR_PRODUCT_VARIANT_EXISTS = "Color variant already exists for product.";
     public static final String SIZE_COLOR_PRODUCT_VARIANT_EXISTS = "Size variant already exists for color product variant.";
 
+    public static final String NOT_ENOUGH_STOCK_EXCEPTION = "Not enough stock for product.";
+
 }

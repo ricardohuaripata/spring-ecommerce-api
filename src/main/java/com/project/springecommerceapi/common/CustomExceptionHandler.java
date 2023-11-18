@@ -32,6 +32,7 @@ import com.project.springecommerceapi.exceptions.ColorProductVariantExistsExcept
 import com.project.springecommerceapi.exceptions.ColorProductVariantNotFoundException;
 import com.project.springecommerceapi.exceptions.EmailExistsException;
 import com.project.springecommerceapi.exceptions.HexcodeExistsException;
+import com.project.springecommerceapi.exceptions.NotEnoughStockException;
 import com.project.springecommerceapi.exceptions.ProductNotFoundException;
 import com.project.springecommerceapi.exceptions.SizeColorProductVariantExistsException;
 import com.project.springecommerceapi.exceptions.SizeColorProductVariantNotFoundException;
@@ -167,6 +168,11 @@ public class CustomExceptionHandler {
     @ExceptionHandler(CartItemNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleCartItemNotFoundException(CartItemNotFoundException e) {
         return buildErrorResponse(HttpStatus.NOT_FOUND, AppConstants.CART_ITEM_NOT_FOUND, null);
+    }
+
+    @ExceptionHandler(NotEnoughStockException.class)
+    public ResponseEntity<ErrorResponse> handleNotEnoughStockException(NotEnoughStockException e) {
+        return buildErrorResponse(HttpStatus.NOT_FOUND, AppConstants.NOT_ENOUGH_STOCK_EXCEPTION, null);
     }
 
     // EXISTS EXCEPTIONS
