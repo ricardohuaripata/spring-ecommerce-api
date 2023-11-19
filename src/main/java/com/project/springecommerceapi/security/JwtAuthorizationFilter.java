@@ -1,6 +1,7 @@
 package com.project.springecommerceapi.security;
 
 import com.project.springecommerceapi.common.AppConstants;
+import com.project.springecommerceapi.enumeration.TokenType;
 
 import lombok.RequiredArgsConstructor;
 
@@ -47,7 +48,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             String token = authorizationHeader.substring(AppConstants.TOKEN_PREFIX.length());
             String email = jwtTokenService.getSubjectFromToken(token);
 
-            if (jwtTokenService.isTokenValid(email, token) &&
+            if (jwtTokenService.isTokenValid(email, token, TokenType.AUTHENTICATION_TOKEN.name()) &&
                     SecurityContextHolder.getContext().getAuthentication() == null) {
 
                 // Comprobar si existe el usuario en la actualidad

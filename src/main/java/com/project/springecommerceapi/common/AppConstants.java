@@ -6,6 +6,8 @@ public class AppConstants {
     public static final String AUTHORITIES = "authorities";
     public static final String TOKEN_UNVERIFIABLE = "Token cannot be verified.";
     public static final String TOKEN_HEADER = "Jwt-Token";
+    public static final String VERIFY_EMAIL = "Verify your email";
+    public static final String RESET_PASSWORD = "Reset your password";
 
     public static final String ACCESS_DENIED = "You don't have permission to access this resource.";
     public static final String FORBIDDEN = "You need to be logged in to access this resource.";
@@ -35,6 +37,7 @@ public class AppConstants {
     public static final String HEXCODE_EXISTS = "Hexcode already exists.";
     public static final String COLOR_PRODUCT_VARIANT_EXISTS = "Color variant already exists for product.";
     public static final String SIZE_COLOR_PRODUCT_VARIANT_EXISTS = "Size variant already exists for color product variant.";
+    public static final String ALREADY_VERIFIED_EMAIL = "This email is already verified.";
 
     public static final String NOT_ENOUGH_STOCK_EXCEPTION = "Not enough stock for product.";
 

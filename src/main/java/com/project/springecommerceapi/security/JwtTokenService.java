@@ -22,15 +22,16 @@ import java.util.stream.Collectors;
 
 @Service
 public class JwtTokenService {
-    
+
     @Value("${jwt_secret}")
     private String jwtSecret;
 
-    public String generateToken(UserPrincipal userPrincipal) {
+    public String generateToken(UserPrincipal userPrincipal, String tokenType) {
         String[] claims = getClaimsFromUser(userPrincipal);
         return JWT.create()
                 .withSubject(userPrincipal.getUsername())
                 .withArrayClaim(AppConstants.AUTHORITIES, claims)
+                .withClaim("tokenType", tokenType)
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + AppConstants.JWT_EXPIRATION_2Wk))
                 .sign(Algorithm.HMAC512(jwtSecret.getBytes()));
@@ -46,14 +47,19 @@ public class JwtTokenService {
         return jwtVerifier.verify(token).getSubject();
     }
 
-    public Boolean isTokenValid(String email, String token) {
+    public Boolean isTokenValid(String email, String token, String expectedTokenType) {
         JWTVerifier jwtVerifier = getJwtVerifier();
-        return StringUtils.isNotEmpty(email) && !isTokenExpired(jwtVerifier, token);
+        return StringUtils.isNotEmpty(email) && !isTokenExpired(jwtVerifier, token) && hasExpectedTokenType(jwtVerifier, token, expectedTokenType);
     }
 
     private Boolean isTokenExpired(JWTVerifier jwtVerifier, String token) {
         Date expiration = jwtVerifier.verify(token).getExpiresAt();
         return expiration.before(new Date());
+    }
+
+    private Boolean hasExpectedTokenType(JWTVerifier jwtVerifier, String token, String expectedTokenType) {
+        String tokenType = jwtVerifier.verify(token).getClaim("tokenType").asString();
+        return tokenType.equals(expectedTokenType);
     }
 
     private String[] getClaimsFromUser(UserPrincipal userPrincipal) {

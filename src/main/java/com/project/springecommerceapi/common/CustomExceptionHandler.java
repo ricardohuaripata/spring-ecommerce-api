@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.project.springecommerceapi.error.ValidationError;
+import com.project.springecommerceapi.exceptions.AlreadyVerifiedEmailException;
 import com.project.springecommerceapi.exceptions.CartItemNotFoundException;
 import com.project.springecommerceapi.exceptions.CartNotFoundException;
 import com.project.springecommerceapi.exceptions.CategoryNotFoundException;
@@ -32,6 +33,7 @@ import com.project.springecommerceapi.exceptions.ColorProductVariantExistsExcept
 import com.project.springecommerceapi.exceptions.ColorProductVariantNotFoundException;
 import com.project.springecommerceapi.exceptions.EmailExistsException;
 import com.project.springecommerceapi.exceptions.HexcodeExistsException;
+import com.project.springecommerceapi.exceptions.InvalidTokenException;
 import com.project.springecommerceapi.exceptions.NotEnoughStockException;
 import com.project.springecommerceapi.exceptions.ProductNotFoundException;
 import com.project.springecommerceapi.exceptions.SizeColorProductVariantExistsException;
@@ -110,6 +112,11 @@ public class CustomExceptionHandler {
     @ExceptionHandler(AuthenticationServiceException.class)
     public ResponseEntity<ErrorResponse> handleInvalidTokenException(AuthenticationServiceException e) {
         return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.INCORRECT_CREDENTIALS, null);
+    }
+
+    @ExceptionHandler(InvalidTokenException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidTokenException(InvalidTokenException e) {
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.INVALID_TOKEN, null);
     }
 
     @ExceptionHandler(NoResultException.class)
@@ -202,6 +209,11 @@ public class CustomExceptionHandler {
     public ResponseEntity<ErrorResponse> handleSizeColorProductVariantExistsException(
             SizeColorProductVariantExistsException e) {
         return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.SIZE_COLOR_PRODUCT_VARIANT_EXISTS, null);
+    }
+
+    @ExceptionHandler(AlreadyVerifiedEmailException.class)
+    public ResponseEntity<ErrorResponse> handleAlreadyVerifiedEmailException(AlreadyVerifiedEmailException e) {
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.ALREADY_VERIFIED_EMAIL, null);
     }
 
 }
