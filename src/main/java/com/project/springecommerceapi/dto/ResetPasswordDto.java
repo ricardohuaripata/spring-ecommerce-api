@@ -1,5 +1,7 @@
 package com.project.springecommerceapi.dto;
 
+import javax.validation.constraints.NotBlank;
+
 import com.project.springecommerceapi.annotation.PasswordRepeatEqual;
 import com.project.springecommerceapi.annotation.ValidPassword;
 
@@ -16,6 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @PasswordRepeatEqual(passwordFieldFirst = "password", passwordFieldSecond = "passwordRepeat")
 public class ResetPasswordDto {
+    @NotBlank
     @ValidPassword
     private String password;
     private String passwordRepeat;

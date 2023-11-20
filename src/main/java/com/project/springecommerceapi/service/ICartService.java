@@ -9,4 +9,6 @@ public interface ICartService {
 
     Cart createCart();
 
+    Cart refreshCart(Cart cart);
+
 }

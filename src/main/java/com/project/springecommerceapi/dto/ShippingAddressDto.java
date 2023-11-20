@@ -1,6 +1,6 @@
 package com.project.springecommerceapi.dto;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -16,31 +16,31 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ShippingAddressDto {
 
-    @NotEmpty
+    @NotBlank
     @Size(max = 64)
     private String firstName;
 
-    @NotEmpty
+    @NotBlank
     @Size(max = 64)
     private String lastName;
 
-    @NotEmpty
+    @NotBlank
     @Size(max = 64)
     private String country;
 
-    @NotEmpty
+    @NotBlank
     @Size(max = 64)
     private String city;
 
-    @NotEmpty
+    @NotBlank
     @Size(max = 10)
     private String postalCode;
 
-    @NotEmpty
+    @NotBlank
     @Size(max = 1024)
     private String address;
 
-    @NotEmpty
+    @NotBlank
     @Size(max = 20)
     private String contactPhone;
 }

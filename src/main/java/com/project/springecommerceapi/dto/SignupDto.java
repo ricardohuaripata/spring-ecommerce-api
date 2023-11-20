@@ -4,6 +4,7 @@ import com.project.springecommerceapi.annotation.PasswordRepeatEqual;
 import com.project.springecommerceapi.annotation.ValidEmail;
 import com.project.springecommerceapi.annotation.ValidPassword;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -20,18 +21,20 @@ import lombok.Setter;
 @AllArgsConstructor
 @PasswordRepeatEqual(passwordFieldFirst = "password", passwordFieldSecond = "passwordRepeat")
 public class SignupDto {
+    @NotBlank
     @ValidEmail
     private String email;
-
+    
+    @NotBlank
     @ValidPassword
     private String password;
     private String passwordRepeat;
 
-    @NotEmpty
+    @NotBlank
     @Size(max = 64)
     private String firstName;
 
-    @NotEmpty
+    @NotBlank
     @Size(max = 64)
     private String lastName;
 }

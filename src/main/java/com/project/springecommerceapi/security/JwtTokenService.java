@@ -7,6 +7,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 
 import com.project.springecommerceapi.common.AppConstants;
 import com.project.springecommerceapi.common.UserPrincipal;
+import com.project.springecommerceapi.enumeration.TokenType;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,15 +27,28 @@ public class JwtTokenService {
     @Value("${jwt_secret}")
     private String jwtSecret;
 
-    public String generateToken(UserPrincipal userPrincipal, String tokenType) {
+    public String generateToken(UserPrincipal userPrincipal, TokenType tokenType) {
         String[] claims = getClaimsFromUser(userPrincipal);
         return JWT.create()
                 .withSubject(userPrincipal.getUsername())
                 .withArrayClaim(AppConstants.AUTHORITIES, claims)
-                .withClaim("tokenType", tokenType)
+                .withClaim("tokenType", tokenType.name())
                 .withIssuedAt(new Date())
-                .withExpiresAt(new Date(System.currentTimeMillis() + AppConstants.JWT_EXPIRATION_2Wk))
+                .withExpiresAt(calculateExpiration(tokenType))
                 .sign(Algorithm.HMAC512(jwtSecret.getBytes()));
+    }
+
+    public Date calculateExpiration(TokenType tokenType) {
+        switch (tokenType) {
+            case AUTHENTICATION_TOKEN:
+                return new Date(System.currentTimeMillis() + AppConstants.JWT_AUTHENTICATION_EXPIRATION);
+            case EMAIL_VERIFICATION_TOKEN:
+                return new Date(System.currentTimeMillis() + AppConstants.JWT_VERIFY_EMAIL_EXPIRATION);
+            case PASSWORD_RESET_TOKEN:
+                return new Date(System.currentTimeMillis() + AppConstants.JWT_RESET_PASSWORD_EXPIRATION);
+            default:
+                return new Date(System.currentTimeMillis() + AppConstants.JWT_AUTHENTICATION_EXPIRATION);
+        }
     }
 
     public List<GrantedAuthority> getAuthoritiesFromToken(String token) {
@@ -47,9 +61,10 @@ public class JwtTokenService {
         return jwtVerifier.verify(token).getSubject();
     }
 
-    public Boolean isTokenValid(String email, String token, String expectedTokenType) {
+    public Boolean isTokenValid(String email, String token, TokenType expectedTokenType) {
         JWTVerifier jwtVerifier = getJwtVerifier();
-        return StringUtils.isNotEmpty(email) && !isTokenExpired(jwtVerifier, token) && hasExpectedTokenType(jwtVerifier, token, expectedTokenType);
+        return StringUtils.isNotEmpty(email) && !isTokenExpired(jwtVerifier, token)
+                && hasExpectedTokenType(jwtVerifier, token, expectedTokenType);
     }
 
     private Boolean isTokenExpired(JWTVerifier jwtVerifier, String token) {
@@ -57,9 +72,9 @@ public class JwtTokenService {
         return expiration.before(new Date());
     }
 
-    private Boolean hasExpectedTokenType(JWTVerifier jwtVerifier, String token, String expectedTokenType) {
+    private Boolean hasExpectedTokenType(JWTVerifier jwtVerifier, String token, TokenType expectedTokenType) {
         String tokenType = jwtVerifier.verify(token).getClaim("tokenType").asString();
-        return tokenType.equals(expectedTokenType);
+        return tokenType.equals(expectedTokenType.name());
     }
 
     private String[] getClaimsFromUser(UserPrincipal userPrincipal) {

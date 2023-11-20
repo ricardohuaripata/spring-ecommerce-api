@@ -17,9 +17,11 @@ public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
-        Pattern pattern = Pattern.compile(AppConstants.EMAIL_PATTERN);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches() && (4 <= email.length() && email.length() <= 64);
+        if (email != null) {
+            Pattern pattern = Pattern.compile(AppConstants.EMAIL_PATTERN);
+            Matcher matcher = pattern.matcher(email);
+            return matcher.matches() && (4 <= email.length() && email.length() <= 64);
+        }
+        return false;
     }
 }
-

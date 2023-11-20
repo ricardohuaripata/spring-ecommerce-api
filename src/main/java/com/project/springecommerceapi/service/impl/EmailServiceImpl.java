@@ -24,6 +24,7 @@ public class EmailServiceImpl implements IEmailService {
     private final JavaMailSender mailSender;
     private final Environment environment;
 
+    // funcion asincrona
     @Override
     @Async
     public void send(String to, String subject, String content) {
@@ -43,8 +44,8 @@ public class EmailServiceImpl implements IEmailService {
 
     @Override
     public String buildEmailVerifyMail(String token, String userName) {
-        String root = environment.getProperty("app.root.backend");
-        String url = root + "/api/v1/auth/verify-email/" + token;
+        String frontendRoot = environment.getProperty("app.root.frontend");
+        String url = frontendRoot + "/auth/verify-email/" + token;
         return buildEmailBody(
                 url,
                 "Verify Email Address",
@@ -54,8 +55,8 @@ public class EmailServiceImpl implements IEmailService {
 
     @Override
     public String buildResetPasswordMail(String token) {
-        String root = environment.getProperty("app.root.backend");
-        String url = root + "/api/v1/auth/reset-password/" + token;
+        String frontendRoot = environment.getProperty("app.root.frontend");
+        String url = frontendRoot + "/auth/reset-password/" + token;
         return buildEmailBody(
                 url,
                 "Reset Your Password",

@@ -48,7 +48,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             String token = authorizationHeader.substring(AppConstants.TOKEN_PREFIX.length());
             String email = jwtTokenService.getSubjectFromToken(token);
 
-            if (jwtTokenService.isTokenValid(email, token, TokenType.AUTHENTICATION_TOKEN.name()) &&
+            if (jwtTokenService.isTokenValid(email, token, TokenType.AUTHENTICATION_TOKEN) &&
                     SecurityContextHolder.getContext().getAuthentication() == null) {
 
                 // Comprobar si existe el usuario en la actualidad

@@ -1,7 +1,5 @@
 package com.project.springecommerceapi.service.impl;
 
-import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -10,12 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.springecommerceapi.dto.CartItemDto;
 import com.project.springecommerceapi.entity.Cart;
 import com.project.springecommerceapi.entity.CartItem;
-import com.project.springecommerceapi.entity.Color;
-import com.project.springecommerceapi.entity.Product;
 import com.project.springecommerceapi.entity.SizeColorProductVariant;
 import com.project.springecommerceapi.exceptions.CartItemNotFoundException;
 import com.project.springecommerceapi.exceptions.NotEnoughStockException;
-import com.project.springecommerceapi.exceptions.SizeColorProductVariantExistsException;
 import com.project.springecommerceapi.repository.CartItemRepository;
 import com.project.springecommerceapi.service.ICartItemService;
 
@@ -27,7 +22,6 @@ import lombok.RequiredArgsConstructor;
 public class CartItemServiceImpl implements ICartItemService {
 
     private final CartItemRepository cartItemRepository;
-    private final CartServiceImpl cartService;
     private final SizeColorProductVariantServiceImpl sizeColorProductVariantService;
 
     @Override

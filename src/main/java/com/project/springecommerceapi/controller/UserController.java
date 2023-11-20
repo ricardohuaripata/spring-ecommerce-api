@@ -1,5 +1,6 @@
 package com.project.springecommerceapi.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.springecommerceapi.common.AppConstants;
 import com.project.springecommerceapi.dto.ShippingAddressDto;
 import com.project.springecommerceapi.entity.ShippingAddress;
 import com.project.springecommerceapi.entity.User;
+import com.project.springecommerceapi.response.SuccessResponse;
+import com.project.springecommerceapi.service.impl.AuthServiceImpl;
 import com.project.springecommerceapi.service.impl.ShippingAddressServiceImpl;
 import com.project.springecommerceapi.service.impl.UserServiceImpl;
 
@@ -27,9 +31,10 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
 public class UserController {
-    
+
     private final UserServiceImpl userService;
     private final ShippingAddressServiceImpl shippingAddressService;
+    private final AuthServiceImpl authService;
 
     @GetMapping("/{userId}")
     public ResponseEntity<?> getUserById(@PathVariable("userId") UUID userId) {
@@ -45,6 +50,7 @@ public class UserController {
 
     @GetMapping("/account/shipping-address")
     public ResponseEntity<?> getShippingAddressList(Authentication authentication) {
+
         User user = userService.getUserByEmail(authentication.getPrincipal().toString());
         List<ShippingAddress> shippingAddressList = shippingAddressService.getShippingAddressListByUser(user);
 
@@ -54,11 +60,26 @@ public class UserController {
     @PostMapping("/account/shipping-address")
     public ResponseEntity<?> createNewShippingAddress(Authentication authentication,
             @RequestBody @Valid ShippingAddressDto shippingAddressDto) {
+
         User user = userService.getUserByEmail(authentication.getPrincipal().toString());
         ShippingAddress createdShippingAddress = shippingAddressService.createNewShippingAddress(user,
                 shippingAddressDto);
 
         return new ResponseEntity<>(createdShippingAddress, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/account/email-verification")
+    public ResponseEntity<?> requestEmailVerification(Authentication authentication) {
+
+        User user = userService.getUserByEmail(authentication.getPrincipal().toString());
+        authService.requestEmailVerification(user);
+
+        SuccessResponse successResponse = SuccessResponse.builder()
+                .message(AppConstants.CHECK_EMAIL)
+                .timestamp(new Date())
+                .build();
+
+        return new ResponseEntity<>(successResponse, HttpStatus.OK);
     }
 
 }
