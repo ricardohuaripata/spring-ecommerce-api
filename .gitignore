@@ -3,6 +3,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+src/main/resources/stripe_secret.key
+src/main/resources/spring_mail_password.key
 
 ### STS ###
 .apt_generated

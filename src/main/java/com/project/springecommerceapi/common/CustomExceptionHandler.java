@@ -26,6 +26,7 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.project.springecommerceapi.error.ValidationError;
 import com.project.springecommerceapi.exceptions.AlreadyVerifiedEmailException;
 import com.project.springecommerceapi.exceptions.CartItemNotFoundException;
+import com.project.springecommerceapi.exceptions.CartItemQuantityLimitReachedException;
 import com.project.springecommerceapi.exceptions.CartNotFoundException;
 import com.project.springecommerceapi.exceptions.CategoryNotFoundException;
 import com.project.springecommerceapi.exceptions.ColorNotFoundException;
@@ -35,6 +36,7 @@ import com.project.springecommerceapi.exceptions.EmailExistsException;
 import com.project.springecommerceapi.exceptions.HexcodeExistsException;
 import com.project.springecommerceapi.exceptions.InvalidTokenException;
 import com.project.springecommerceapi.exceptions.NotEnoughStockException;
+import com.project.springecommerceapi.exceptions.OrderNotFoundException;
 import com.project.springecommerceapi.exceptions.ProductNotFoundException;
 import com.project.springecommerceapi.exceptions.SizeColorProductVariantExistsException;
 import com.project.springecommerceapi.exceptions.SizeColorProductVariantNotFoundException;
@@ -177,9 +179,9 @@ public class CustomExceptionHandler {
         return buildErrorResponse(HttpStatus.NOT_FOUND, AppConstants.CART_ITEM_NOT_FOUND, null);
     }
 
-    @ExceptionHandler(NotEnoughStockException.class)
-    public ResponseEntity<ErrorResponse> handleNotEnoughStockException(NotEnoughStockException e) {
-        return buildErrorResponse(HttpStatus.NOT_FOUND, AppConstants.NOT_ENOUGH_STOCK_EXCEPTION, null);
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleOrderNotFoundException(OrderNotFoundException e) {
+        return buildErrorResponse(HttpStatus.NOT_FOUND, AppConstants.ORDER_NOT_FOUND, null);
     }
 
     // EXISTS EXCEPTIONS
@@ -211,9 +213,23 @@ public class CustomExceptionHandler {
         return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.SIZE_COLOR_PRODUCT_VARIANT_EXISTS, null);
     }
 
+    // OTHER EXCEPTIONS
+
+    @ExceptionHandler(NotEnoughStockException.class)
+    public ResponseEntity<ErrorResponse> handleNotEnoughStockException(NotEnoughStockException e) {
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.NOT_ENOUGH_STOCK_EXCEPTION, null);
+    }
+
     @ExceptionHandler(AlreadyVerifiedEmailException.class)
     public ResponseEntity<ErrorResponse> handleAlreadyVerifiedEmailException(AlreadyVerifiedEmailException e) {
         return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.ALREADY_VERIFIED_EMAIL, null);
+    }
+
+    @ExceptionHandler(CartItemQuantityLimitReachedException.class)
+    public ResponseEntity<ErrorResponse> handleCartItemQuantityLimitReachedException(
+            CartItemQuantityLimitReachedException e) {
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.CART_ITEM_QUANTITY_LIMIT_REACHED_EXCEPTION,
+                null);
     }
 
 }

@@ -47,9 +47,6 @@ public class Order {
     @Check(constraints = "size IN ('pending', 'sent', 'delivered')")
     private String status;
 
-    @Column(name = "amount", nullable = false, precision = 10, scale = 2)
-    private BigDecimal amount;
-
     @Column(name = "transaction_id", length = 128, nullable = false)
     private String transactionId;
 
