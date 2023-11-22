@@ -71,9 +71,9 @@ INSERT INTO public.color_product_variants (id, back_image_url, base_price, date_
 -- VARIACIONES PRODUCTO-TALLA-COLOR
 
 INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('e7165b8e-cb68-4ad5-9094-887e3f94a924','2023-11-16 19:09:06.43','2023-11-16 19:09:06.43','S',99,'571a42a0-4dcb-4a21-a8c8-f13852850ffc');
-INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('2d2f18b8-263d-473e-8e63-d2c36ea89b40','2023-11-16 19:09:28.03','2023-11-16 19:09:28.03','M',99,'571a42a0-4dcb-4a21-a8c8-f13852850ffc');
+INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES('2d2f18b8-263d-473e-8e63-d2c36ea89b40','2023-11-16 19:09:28.03','2023-11-22 20:12:30.249','M',97,'571a42a0-4dcb-4a21-a8c8-f13852850ffc');
 INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('08849d75-6b02-4c0d-a1fb-715fb77bfebb','2023-11-16 19:09:36.222','2023-11-16 19:09:36.222','L',99,'571a42a0-4dcb-4a21-a8c8-f13852850ffc');
-INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('757d3745-0168-4d1c-a699-195fca04947f','2023-11-16 19:09:40.532','2023-11-16 19:09:40.532','XL',99,'571a42a0-4dcb-4a21-a8c8-f13852850ffc');
+INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('757d3745-0168-4d1c-a699-195fca04947f','2023-11-16 19:09:40.532','2023-11-22 20:12:30.249','XL',98,'571a42a0-4dcb-4a21-a8c8-f13852850ffc');
 INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('2e84e04f-e73d-4c1b-a337-d5db1d9f3b69','2023-11-16 19:09:43.754','2023-11-16 19:09:43.754','XXL',99,'571a42a0-4dcb-4a21-a8c8-f13852850ffc');
 
 INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('1b952080-ca8f-45ff-9d85-c5ca82912cc1','2023-11-16 19:10:37.752','2023-11-16 19:10:37.752','S',99,'bcd80b22-bd91-485a-80c1-0a105d14727e');
@@ -84,17 +84,17 @@ INSERT INTO public.size_color_product_variants (id,date_created,date_last_modifi
 
 INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('4c78c595-bc02-49d1-9127-9c13ebc70a53','2023-11-16 19:11:11.706','2023-11-16 19:11:11.706','S',99,'a04a076c-54a0-4272-adc0-2fc2a16a8cf9');
 INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('a5cd9cd5-addd-4dfd-99f4-de04f02870f5','2023-11-16 19:11:15.098','2023-11-16 19:11:15.098','M',99,'a04a076c-54a0-4272-adc0-2fc2a16a8cf9');
-INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('ad7765cf-40d7-4f55-b7b8-56af925aa8db','2023-11-16 19:11:17.756','2023-11-16 19:11:17.756','L',99,'a04a076c-54a0-4272-adc0-2fc2a16a8cf9');
+INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('ad7765cf-40d7-4f55-b7b8-56af925aa8db','2023-11-16 19:11:17.756','2023-11-22 20:12:30.249','L',97,'a04a076c-54a0-4272-adc0-2fc2a16a8cf9');
 INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('87e2c0da-e810-4aed-ab37-bdab9afd3a9a','2023-11-16 19:11:19.768','2023-11-16 19:11:19.768','XL',99,'a04a076c-54a0-4272-adc0-2fc2a16a8cf9');
 INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('7c0a47a2-d618-4ccb-b2b6-dce040cb7dc8','2023-11-16 19:11:21.649','2023-11-16 19:11:21.649','XXL',99,'a04a076c-54a0-4272-adc0-2fc2a16a8cf9');
 
 INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('3891ad0c-55e0-4d2a-acee-eea76de77613','2023-11-16 19:11:34.217','2023-11-16 19:11:34.217','S',99,'d570a60e-6b24-484c-92e6-b6ceeb9eb3aa');
 INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('56ab53ed-2321-46ea-bc45-90e313dfa1a0','2023-11-16 19:11:36.829','2023-11-16 19:11:36.829','M',99,'d570a60e-6b24-484c-92e6-b6ceeb9eb3aa');
 INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('3f568c1c-52f6-4e48-ae71-6a3e3ea305e4','2023-11-16 19:11:40.419','2023-11-16 19:11:40.419','L',99,'d570a60e-6b24-484c-92e6-b6ceeb9eb3aa');
-INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('4a08cf9f-e503-47ce-a8b5-f8531635c46f','2023-11-16 19:11:42.495','2023-11-16 19:11:42.495','XL',99,'d570a60e-6b24-484c-92e6-b6ceeb9eb3aa');
+INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('4a08cf9f-e503-47ce-a8b5-f8531635c46f','2023-11-16 19:11:42.495','2023-11-22 20:12:30.249','XL',98,'d570a60e-6b24-484c-92e6-b6ceeb9eb3aa');
 INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('06ba425e-9b4d-4dcf-b204-dfe17246db00','2023-11-16 19:11:44.505','2023-11-16 19:11:44.505','XXL',99,'d570a60e-6b24-484c-92e6-b6ceeb9eb3aa');
 
-INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('ca1703a0-4a50-4df0-a382-db5c090192d5','2023-11-16 19:11:54.291','2023-11-16 19:11:54.291','S',99,'01326f52-c1a8-40e9-8c09-ff5b54b52321');
+INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('ca1703a0-4a50-4df0-a382-db5c090192d5','2023-11-16 19:11:54.291','2023-11-22 20:12:30.249','S',96,'01326f52-c1a8-40e9-8c09-ff5b54b52321');
 INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('f5a8b11c-5ed7-4e0d-aedc-48c5b60fa3a7','2023-11-16 19:11:56.797','2023-11-16 19:11:56.797','M',99,'01326f52-c1a8-40e9-8c09-ff5b54b52321');
 INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('14c9324c-e7c3-4cec-b26e-09c58a9825b1','2023-11-16 19:11:59.629','2023-11-16 19:11:59.629','L',99,'01326f52-c1a8-40e9-8c09-ff5b54b52321');
 INSERT INTO public.size_color_product_variants (id,date_created,date_last_modified,"size",stock,color_product_variant_id) VALUES ('1ba02e4a-bbee-4e58-9e0e-cef1d79c970f','2023-11-16 19:12:01.652','2023-11-16 19:12:01.652','XL',99,'01326f52-c1a8-40e9-8c09-ff5b54b52321');
@@ -139,3 +139,13 @@ INSERT INTO public.cart_items (id,quantity,cart_id,size_color_product_variant_id
 INSERT INTO public.cart_items (id,quantity,cart_id,size_color_product_variant_id) VALUES ('b0b91662-db9c-4708-8e49-d7d0ddfe2b59',2,'52f1839a-a010-4ccd-922d-e990cfa530f3','ad7765cf-40d7-4f55-b7b8-56af925aa8db');
 INSERT INTO public.cart_items (id,quantity,cart_id,size_color_product_variant_id) VALUES ('975b462d-1cd5-4437-a4dc-eb5e243ec582',1,'52f1839a-a010-4ccd-922d-e990cfa530f3','4a08cf9f-e503-47ce-a8b5-f8531635c46f');
 INSERT INTO public.cart_items (id,quantity,cart_id,size_color_product_variant_id) VALUES ('6c7cb23c-146f-47d5-aa5e-3e1873c3c225',3,'52f1839a-a010-4ccd-922d-e990cfa530f3','ca1703a0-4a50-4df0-a382-db5c090192d5');
+
+-- PEDIDO
+
+INSERT INTO public.orders (id,address,charge_id,city,contact_phone,country,date_created,date_last_modified,firstname,lastname,postal_code,status,user_id) VALUES ('7c72ff82-5f49-456e-a654-14dcccc8c403','Calle Juan Alberto, Nº 13, 2ºA','ch_3OFLqXEARNZfy9ac1W7bWZgh','Málaga','77040813','España','2023-11-22 20:12:30.249','2023-11-22 20:12:30.249','Ricardo','Huaripata','49023','pending','07ea76e0-142f-499a-929f-bedb08c79624');
+
+INSERT INTO public.order_items (id,quantity,unit_price,order_id,size_color_product_variant_id) VALUES ('164b913d-16af-4493-b2ab-2ab45d22277e',2,42.99,'7c72ff82-5f49-456e-a654-14dcccc8c403','2d2f18b8-263d-473e-8e63-d2c36ea89b40');
+INSERT INTO public.order_items (id,quantity,unit_price,order_id,size_color_product_variant_id) VALUES ('50df44c3-aa3d-4167-bcab-707496f80c41',1,42.99,'7c72ff82-5f49-456e-a654-14dcccc8c403','757d3745-0168-4d1c-a699-195fca04947f');
+INSERT INTO public.order_items (id,quantity,unit_price,order_id,size_color_product_variant_id) VALUES ('92e7cb72-f617-4b59-8a9a-07890a9654a7',2,34.99,'7c72ff82-5f49-456e-a654-14dcccc8c403','ad7765cf-40d7-4f55-b7b8-56af925aa8db');
+INSERT INTO public.order_items (id,quantity,unit_price,order_id,size_color_product_variant_id) VALUES ('5c7e2739-e438-4069-a064-184a3ba03b51',1,34.99,'7c72ff82-5f49-456e-a654-14dcccc8c403','4a08cf9f-e503-47ce-a8b5-f8531635c46f');
+INSERT INTO public.order_items (id,quantity,unit_price,order_id,size_color_product_variant_id) VALUES ('4245708c-df1a-490e-8fb4-fcbd1f016242',3,42.99,'7c72ff82-5f49-456e-a654-14dcccc8c403','ca1703a0-4a50-4df0-a382-db5c090192d5');

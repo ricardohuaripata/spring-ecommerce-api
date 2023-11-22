@@ -47,8 +47,8 @@ public class Order {
     @Check(constraints = "status IN ('pending', 'sent', 'delivered')")
     private String status;
 
-    @Column(name = "transaction_id", length = 128, nullable = false)
-    private String transactionId;
+    @Column(name = "charge_id", length = 128, nullable = false)
+    private String chargeId;
 
     @Column(length = 64, nullable = false)
     private String firstname;

@@ -49,5 +49,7 @@ public class AppConstants {
     public static final String NO_ITEMS_TO_PAY = "There are no items to pay.";
     public static final String VERIFIED_EMAIL_REQUIRED = "Verified email is required.";
     public static final String PAYMENT_TRANSACTION_FAILED = "The payment transaction failed.";
+    public static final String INVALID_OPERATION = "You cannot perform this operation.";
+    public static final String SUCCESSFUL_ORDER = "Thanks for your purchase";
 
 }

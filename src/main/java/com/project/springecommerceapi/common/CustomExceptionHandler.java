@@ -35,6 +35,7 @@ import com.project.springecommerceapi.exceptions.ColorProductVariantNotFoundExce
 import com.project.springecommerceapi.exceptions.EmailExistsException;
 import com.project.springecommerceapi.exceptions.NoItemsToPayException;
 import com.project.springecommerceapi.exceptions.HexcodeExistsException;
+import com.project.springecommerceapi.exceptions.InvalidOperationException;
 import com.project.springecommerceapi.exceptions.InvalidTokenException;
 import com.project.springecommerceapi.exceptions.NotEnoughStockException;
 import com.project.springecommerceapi.exceptions.OrderNotFoundException;
@@ -248,6 +249,11 @@ public class CustomExceptionHandler {
     @ExceptionHandler(PaymentTransactionFailedException.class)
     public ResponseEntity<ErrorResponse> handlePaymentTransactionFailedException(PaymentTransactionFailedException e) {
         return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.PAYMENT_TRANSACTION_FAILED, null);
+    }
+
+    @ExceptionHandler(InvalidOperationException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidOperationException(InvalidOperationException e) {
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.INVALID_OPERATION, null);
     }
 
 }

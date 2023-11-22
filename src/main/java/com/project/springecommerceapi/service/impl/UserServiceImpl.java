@@ -2,6 +2,7 @@ package com.project.springecommerceapi.service.impl;
 
 import java.util.UUID;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,11 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
+    }
+
+    public final User getAuthenticatedUser() {
+        String authUserEmail = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        return getUserByEmail(authUserEmail);
     }
 
 }

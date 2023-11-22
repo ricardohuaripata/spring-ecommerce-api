@@ -18,6 +18,8 @@ import com.project.springecommerceapi.dto.ShippingAddressDto;
 import com.project.springecommerceapi.entity.Cart;
 import com.project.springecommerceapi.entity.Order;
 import com.project.springecommerceapi.entity.User;
+import com.project.springecommerceapi.enumeration.Role;
+import com.project.springecommerceapi.response.OrderResponse;
 import com.project.springecommerceapi.service.impl.CartServiceImpl;
 import com.project.springecommerceapi.service.impl.OrderServiceImpl;
 import com.project.springecommerceapi.service.impl.UserServiceImpl;
@@ -37,14 +39,14 @@ public class OrderController {
 
     @GetMapping("/{orderId}")
     public ResponseEntity<?> getOrder(@PathVariable("orderId") UUID orderId) {
-        Order orderToFind = orderService.getOrderById(orderId);
-        return new ResponseEntity<>(orderToFind, HttpStatus.OK);
+        OrderResponse orderResponse = orderService.getOrder(orderId);
+        return new ResponseEntity<>(orderResponse, HttpStatus.OK);
     }
 
     @PostMapping()
     public ResponseEntity<?> createOrder(Authentication authentication, @RequestBody @Valid OrderDto orderDto) {
         User user = userService.getUserByEmail(authentication.getPrincipal().toString());
-        Order createdOrder = orderService.createOrder(user, orderDto);
+        OrderResponse createdOrder = orderService.createOrder(user, orderDto);
         return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
     }
 
