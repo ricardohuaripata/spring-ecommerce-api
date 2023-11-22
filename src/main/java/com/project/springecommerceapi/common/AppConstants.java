@@ -44,7 +44,10 @@ public class AppConstants {
     public static final String SIZE_COLOR_PRODUCT_VARIANT_EXISTS = "Size variant already exists for color product variant.";
 
     public static final String ALREADY_VERIFIED_EMAIL = "This email is already verified.";
-    public static final String NOT_ENOUGH_STOCK_EXCEPTION = "Not enough stock for product.";
-    public static final String CART_ITEM_QUANTITY_LIMIT_REACHED_EXCEPTION = "Quantity limit reached for this item.";
+    public static final String NOT_ENOUGH_STOCK = "Not enough stock for product.";
+    public static final String CART_ITEM_QUANTITY_LIMIT_REACHED = "Quantity limit reached for this item.";
+    public static final String NO_ITEMS_TO_PAY = "There are no items to pay.";
+    public static final String VERIFIED_EMAIL_REQUIRED = "Verified email is required.";
+    public static final String PAYMENT_TRANSACTION_FAILED = "The payment transaction failed.";
 
 }

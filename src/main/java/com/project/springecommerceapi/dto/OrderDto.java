@@ -25,20 +25,7 @@ public class OrderDto {
     private UUID cartId;
 
     @NotBlank
-    @Size(max = 20)
-    private String cardNumber;
-
-    @NotBlank
-    @Size(min = 2, max = 2)
-    private String expMonth;
-
-    @NotBlank
-    @Size(min = 2, max = 2)
-    private String expYear;
-
-    @NotBlank
-    @Size(min = 3, max = 4)
-    private String cvc;
+    private String cardToken;
 
     @NotBlank
     @Size(max = 64)

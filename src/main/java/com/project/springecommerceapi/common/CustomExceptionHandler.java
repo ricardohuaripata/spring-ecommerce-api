@@ -33,15 +33,18 @@ import com.project.springecommerceapi.exceptions.ColorNotFoundException;
 import com.project.springecommerceapi.exceptions.ColorProductVariantExistsException;
 import com.project.springecommerceapi.exceptions.ColorProductVariantNotFoundException;
 import com.project.springecommerceapi.exceptions.EmailExistsException;
+import com.project.springecommerceapi.exceptions.NoItemsToPayException;
 import com.project.springecommerceapi.exceptions.HexcodeExistsException;
 import com.project.springecommerceapi.exceptions.InvalidTokenException;
 import com.project.springecommerceapi.exceptions.NotEnoughStockException;
 import com.project.springecommerceapi.exceptions.OrderNotFoundException;
+import com.project.springecommerceapi.exceptions.PaymentTransactionFailedException;
 import com.project.springecommerceapi.exceptions.ProductNotFoundException;
 import com.project.springecommerceapi.exceptions.SizeColorProductVariantExistsException;
 import com.project.springecommerceapi.exceptions.SizeColorProductVariantNotFoundException;
 import com.project.springecommerceapi.exceptions.SlugExistsException;
 import com.project.springecommerceapi.exceptions.UserNotFoundException;
+import com.project.springecommerceapi.exceptions.VerifiedEmailRequiredException;
 import com.project.springecommerceapi.response.ErrorResponse;
 
 @RestControllerAdvice
@@ -217,7 +220,7 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(NotEnoughStockException.class)
     public ResponseEntity<ErrorResponse> handleNotEnoughStockException(NotEnoughStockException e) {
-        return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.NOT_ENOUGH_STOCK_EXCEPTION, null);
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.NOT_ENOUGH_STOCK, null);
     }
 
     @ExceptionHandler(AlreadyVerifiedEmailException.class)
@@ -228,8 +231,23 @@ public class CustomExceptionHandler {
     @ExceptionHandler(CartItemQuantityLimitReachedException.class)
     public ResponseEntity<ErrorResponse> handleCartItemQuantityLimitReachedException(
             CartItemQuantityLimitReachedException e) {
-        return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.CART_ITEM_QUANTITY_LIMIT_REACHED_EXCEPTION,
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.CART_ITEM_QUANTITY_LIMIT_REACHED,
                 null);
+    }
+
+    @ExceptionHandler(NoItemsToPayException.class)
+    public ResponseEntity<ErrorResponse> handleNoItemsToPayException(NoItemsToPayException e) {
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.NO_ITEMS_TO_PAY, null);
+    }
+
+    @ExceptionHandler(VerifiedEmailRequiredException.class)
+    public ResponseEntity<ErrorResponse> handleVerifiedEmailRequiredException(VerifiedEmailRequiredException e) {
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.VERIFIED_EMAIL_REQUIRED, null);
+    }
+
+    @ExceptionHandler(PaymentTransactionFailedException.class)
+    public ResponseEntity<ErrorResponse> handlePaymentTransactionFailedException(PaymentTransactionFailedException e) {
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.PAYMENT_TRANSACTION_FAILED, null);
     }
 
 }

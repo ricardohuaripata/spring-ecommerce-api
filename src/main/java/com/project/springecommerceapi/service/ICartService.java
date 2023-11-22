@@ -16,4 +16,7 @@ public interface ICartService {
     Cart createCartItem(UUID cartId, CartItemDto cartItemDto);
 
     Cart deleteCartItem(UUID cartItemId);
+
+    void clearCart(UUID cartItemId);
+
 }

@@ -1,6 +1,8 @@
 package com.project.springecommerceapi.service.impl;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ import com.project.springecommerceapi.entity.SizeColorProductVariant;
 import com.project.springecommerceapi.exceptions.CartItemQuantityLimitReachedException;
 import com.project.springecommerceapi.exceptions.CartItemNotFoundException;
 import com.project.springecommerceapi.exceptions.CartNotFoundException;
+import com.project.springecommerceapi.exceptions.NoItemsToPayException;
 import com.project.springecommerceapi.exceptions.NotEnoughStockException;
 import com.project.springecommerceapi.repository.CartItemRepository;
 import com.project.springecommerceapi.repository.CartRepository;
@@ -109,6 +112,17 @@ public class CartServiceImpl implements ICartService {
         cart.setDateLastModified(new Date());
         cart.setDateExpiration(new Date(System.currentTimeMillis() + AppConstants.CART_EXPIRATION));
         return cartRepository.save(cart);
+    }
+
+    @Override
+    public void clearCart(UUID cartId) {
+        Cart cart = getCartById(cartId);
+        List<CartItem> itemList = cart.getCartItems();
+
+        for (CartItem item : itemList) {
+            cartItemRepository.delete(item);
+        }
+        refreshCart(cart);
     }
 
 }

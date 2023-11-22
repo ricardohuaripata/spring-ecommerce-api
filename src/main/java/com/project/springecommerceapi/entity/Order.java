@@ -44,7 +44,7 @@ public class Order {
     private User user;
 
     @Column(name = "status", length = 64, nullable = false)
-    @Check(constraints = "size IN ('pending', 'sent', 'delivered')")
+    @Check(constraints = "status IN ('pending', 'sent', 'delivered')")
     private String status;
 
     @Column(name = "transaction_id", length = 128, nullable = false)

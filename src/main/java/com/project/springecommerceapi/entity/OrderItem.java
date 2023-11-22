@@ -44,7 +44,7 @@ public class OrderItem {
 
     @ManyToOne
     @JoinColumn(name = "size_color_product_variant_id", referencedColumnName = "id", nullable = false)
-    private SizeColorProductVariant sizeColorProductVariantId;
+    private SizeColorProductVariant sizeColorProductVariant;
 
     @Column(name = "quantity", nullable = false)
     private int quantity;

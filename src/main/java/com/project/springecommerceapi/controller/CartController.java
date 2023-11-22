@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,14 +39,20 @@ public class CartController {
         return new ResponseEntity<>(createdCart, HttpStatus.CREATED);
     }
 
-    @PostMapping("/{cartId}")
+    @PatchMapping("/{cartId}")
     public ResponseEntity<?> addToCart(@PathVariable("cartId") UUID cartId,
             @RequestBody @Valid CartItemDto cartItemDto) {
         Cart cart = cartService.createCartItem(cartId, cartItemDto);
         return new ResponseEntity<>(cart, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/item/{cartItemId}")
+    @DeleteMapping("/{cartId}/items")
+    public ResponseEntity<?> clearCart(@PathVariable("cartId") UUID cartId) {
+        cartService.clearCart(cartId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/items/{cartItemId}")
     public ResponseEntity<?> deleteCartItem(@PathVariable("cartItemId") UUID cartItemId) {
         Cart cart = cartService.deleteCartItem(cartItemId);
         return new ResponseEntity<>(cart, HttpStatus.OK);
