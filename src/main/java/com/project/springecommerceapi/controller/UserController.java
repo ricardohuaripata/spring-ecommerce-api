@@ -75,8 +75,8 @@ public class UserController {
         authService.requestEmailVerification(user);
 
         SuccessResponse successResponse = SuccessResponse.builder()
+                .type("Success")
                 .message(AppConstants.CHECK_EMAIL)
-                .timestamp(new Date())
                 .build();
 
         return new ResponseEntity<>(successResponse, HttpStatus.OK);

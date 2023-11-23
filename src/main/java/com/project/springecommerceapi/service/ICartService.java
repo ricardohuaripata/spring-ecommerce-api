@@ -17,6 +17,8 @@ public interface ICartService {
 
     Cart deleteCartItem(UUID cartItemId);
 
-    void clearCart(UUID cartItemId);
+    void clearCart(UUID cartId);
+
+    int deleteExpiredCarts();
 
 }

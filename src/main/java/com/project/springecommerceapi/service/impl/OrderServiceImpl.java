@@ -23,7 +23,6 @@ import com.project.springecommerceapi.entity.OrderItem;
 import com.project.springecommerceapi.entity.SizeColorProductVariant;
 import com.project.springecommerceapi.entity.User;
 import com.project.springecommerceapi.enumeration.Role;
-import com.project.springecommerceapi.enumeration.TokenType;
 import com.project.springecommerceapi.exceptions.InvalidOperationException;
 import com.project.springecommerceapi.exceptions.NoItemsToPayException;
 import com.project.springecommerceapi.exceptions.OrderNotFoundException;
@@ -33,7 +32,6 @@ import com.project.springecommerceapi.repository.OrderItemRepository;
 import com.project.springecommerceapi.repository.OrderRepository;
 import com.project.springecommerceapi.repository.SizeColorProductVariantRepository;
 import com.project.springecommerceapi.response.OrderResponse;
-import com.project.springecommerceapi.response.SuccessResponse;
 import com.project.springecommerceapi.service.IOrderService;
 
 import lombok.RequiredArgsConstructor;
@@ -213,7 +211,7 @@ public class OrderServiceImpl implements IOrderService {
                 .totalQuantity(totalItems)
                 .totalAmount(totalAmount)
                 .build();
-
+        // Enviar resumen del pedido al email del usuario
         String emailSuccessfulOrder = emailService.buildOrderSuccessDetailsMail(orderResponse);
         emailService.send(user.getEmail(), AppConstants.SUCCESSFUL_ORDER, emailSuccessfulOrder);
 

@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.springecommerceapi.common.AppConstants;
 import com.project.springecommerceapi.dto.CartItemDto;
 import com.project.springecommerceapi.entity.Cart;
+import com.project.springecommerceapi.response.SuccessResponse;
 import com.project.springecommerceapi.service.impl.CartServiceImpl;
 
+import java.util.Date;
 import java.util.UUID;
 
 import javax.validation.Valid;
@@ -49,13 +52,27 @@ public class CartController {
     @DeleteMapping("/{cartId}/items")
     public ResponseEntity<?> clearCart(@PathVariable("cartId") UUID cartId) {
         cartService.clearCart(cartId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        SuccessResponse successResponse = SuccessResponse.builder()
+                .type("Success")
+                .message("Cart cleared")
+                .build();
+        return new ResponseEntity<>(successResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/items/{cartItemId}")
     public ResponseEntity<?> deleteCartItem(@PathVariable("cartItemId") UUID cartItemId) {
         Cart cart = cartService.deleteCartItem(cartItemId);
         return new ResponseEntity<>(cart, HttpStatus.OK);
+    }
+
+    @DeleteMapping()
+    public ResponseEntity<?> deleteExpiredCarts() {
+        int deletedCarts = cartService.deleteExpiredCarts();
+        SuccessResponse successResponse = SuccessResponse.builder()
+                .type("Success")
+                .message("Deleted expired carts: " + deletedCarts)
+                .build();
+        return new ResponseEntity<>(successResponse, HttpStatus.OK);
     }
 
 }

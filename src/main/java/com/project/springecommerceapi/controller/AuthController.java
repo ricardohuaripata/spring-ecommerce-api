@@ -65,8 +65,8 @@ public class AuthController {
     public ResponseEntity<?> forgotPassword(@RequestBody @Valid ForgotPasswordDto forgotPasswordDto) {
         authService.forgotPassword(forgotPasswordDto);
         SuccessResponse successResponse = SuccessResponse.builder()
+                .type("Success")
                 .message(AppConstants.CHECK_EMAIL)
-                .timestamp(new Date())
                 .build();
         return new ResponseEntity<>(successResponse, HttpStatus.OK);
     }

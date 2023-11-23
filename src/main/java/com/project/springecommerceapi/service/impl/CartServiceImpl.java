@@ -1,6 +1,5 @@
 package com.project.springecommerceapi.service.impl;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -16,7 +15,6 @@ import com.project.springecommerceapi.entity.SizeColorProductVariant;
 import com.project.springecommerceapi.exceptions.CartItemQuantityLimitReachedException;
 import com.project.springecommerceapi.exceptions.CartItemNotFoundException;
 import com.project.springecommerceapi.exceptions.CartNotFoundException;
-import com.project.springecommerceapi.exceptions.NoItemsToPayException;
 import com.project.springecommerceapi.exceptions.NotEnoughStockException;
 import com.project.springecommerceapi.repository.CartItemRepository;
 import com.project.springecommerceapi.repository.CartRepository;
@@ -40,7 +38,6 @@ public class CartServiceImpl implements ICartService {
 
     @Override
     public Cart createCart() {
-
         Cart newCart = new Cart();
         Date currentDate = new Date();
         Date expirationDate = new Date(System.currentTimeMillis() + AppConstants.CART_EXPIRATION);
@@ -48,15 +45,12 @@ public class CartServiceImpl implements ICartService {
         newCart.setDateCreated(currentDate);
         newCart.setDateLastModified(currentDate);
         newCart.setDateExpiration(expirationDate);
-
         return cartRepository.save(newCart);
-
     }
 
     @Override
     public CartItem getCartItemById(UUID cartItemId) {
         return cartItemRepository.findById(cartItemId).orElseThrow(CartItemNotFoundException::new);
-
     }
 
     @Override
@@ -123,6 +117,15 @@ public class CartServiceImpl implements ICartService {
             cartItemRepository.delete(item);
         }
         refreshCart(cart);
+    }
+
+    @Override
+    public int deleteExpiredCarts() {
+        List<Cart> expiredCartList = cartRepository.findAllExpiredCarts(new Date());
+        for (Cart expiredCart : expiredCartList) {
+            cartRepository.delete(expiredCart);
+        }
+        return expiredCartList.size();
     }
 
 }

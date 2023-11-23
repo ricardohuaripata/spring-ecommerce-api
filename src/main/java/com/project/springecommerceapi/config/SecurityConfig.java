@@ -53,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/auth/forgot-password").permitAll()
                 .antMatchers("/api/v1/auth/verify-email/{token}").permitAll()
                 .antMatchers("/api/v1/auth/reset-password/{token}").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/v1/cart").hasRole("ADMIN")
                 .antMatchers("/api/v1/cart/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/v1/category/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/v1/color/**").permitAll()

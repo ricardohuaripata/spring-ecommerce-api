@@ -94,7 +94,7 @@ public class EmailServiceImpl implements IEmailService {
         buildedMail.append("<h2 style=\"background: #FFCC03; padding: 15px; margin: 0; font-weight: 700; font-size: 20px;\">Order Items</h2>");
         for (OrderItem item : orderResponse.getOrderItems()) {
             buildedMail.append("<div style=\"padding: 20px;margin-top: 20px;\">");
-            buildedMail.append("<div style=\"margin-bottom: 20px;\">");
+            buildedMail.append("<div style=\"margin-bottom: 0;\">");
             buildedMail.append("<img src=\"").append(item.getSizeColorProductVariant().getColorProductVariant().getFrontImageUrl()).append("\" alt=\"").append(item.getSizeColorProductVariant().getColorProductVariant().getProduct().getTitle()).append("\" style=\"width: 100px; height: auto; margin-right: 10px; display: inline-block;\">");
             buildedMail.append("<div style=\"display: inline-block; vertical-align: top;\">");
             buildedMail.append("<p style=\"margin: 0; font-size: 16px;\"><strong>").append(item.getSizeColorProductVariant().getColorProductVariant().getProduct().getTitle()).append("</strong></p>");
