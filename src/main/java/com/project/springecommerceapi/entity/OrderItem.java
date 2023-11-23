@@ -1,10 +1,8 @@
 package com.project.springecommerceapi.entity;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Column;
@@ -15,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Check;
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AllArgsConstructor;

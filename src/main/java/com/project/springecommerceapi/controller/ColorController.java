@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.springecommerceapi.dto.CategoryDto;
 import com.project.springecommerceapi.dto.ColorDto;
-import com.project.springecommerceapi.entity.Category;
 import com.project.springecommerceapi.entity.Color;
 import com.project.springecommerceapi.service.impl.ColorServiceImpl;
 

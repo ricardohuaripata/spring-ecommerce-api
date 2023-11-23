@@ -11,7 +11,7 @@ public interface IAuthService {
 
     User signUp(SignupDto signupDto);
 
-    void requestEmailVerification(User user);
+    void requestEmailVerification();
 
     User verifyEmail(String token);
 

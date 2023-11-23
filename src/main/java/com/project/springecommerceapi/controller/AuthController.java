@@ -22,8 +22,6 @@ import com.project.springecommerceapi.response.SuccessResponse;
 import com.project.springecommerceapi.security.JwtTokenService;
 import com.project.springecommerceapi.service.impl.AuthServiceImpl;
 
-import java.util.Date;
-
 import javax.validation.Valid;
 
 import lombok.RequiredArgsConstructor;

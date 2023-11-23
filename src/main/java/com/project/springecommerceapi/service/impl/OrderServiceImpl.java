@@ -104,7 +104,8 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public OrderResponse createOrder(User user, OrderDto orderDto) {
+    public OrderResponse createOrder(OrderDto orderDto) {
+        User user = userService.getAuthenticatedUser();
 
         Cart cart = cartService.getCartById(orderDto.getCartId());
         List<CartItem> itemList = cart.getCartItems();

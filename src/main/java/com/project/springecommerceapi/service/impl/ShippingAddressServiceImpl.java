@@ -20,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ShippingAddressServiceImpl implements IShippingAddressService {
     private final ShippingAddressRepository shippingAddressRepository;
+    private final UserServiceImpl userService;
 
     @Override
     public ShippingAddress getShippingAddressById(UUID shippingAddressId) {
@@ -27,7 +28,10 @@ public class ShippingAddressServiceImpl implements IShippingAddressService {
     }
 
     @Override
-    public ShippingAddress createNewShippingAddress(User user, ShippingAddressDto shippingAddressDto) {
+    public ShippingAddress createNewShippingAddress(ShippingAddressDto shippingAddressDto) {
+
+        User user = userService.getAuthenticatedUser();
+
         ShippingAddress newShippingAddress = new ShippingAddress();
 
         newShippingAddress.setUser(user);
@@ -46,7 +50,8 @@ public class ShippingAddressServiceImpl implements IShippingAddressService {
     }
 
     @Override
-    public List<ShippingAddress> getShippingAddressListByUser(User user) {
+    public List<ShippingAddress> getShippingAddressListByUser() {
+        User user = userService.getAuthenticatedUser();
         return shippingAddressRepository.findShippingAddressesByUser(user);
     }
 

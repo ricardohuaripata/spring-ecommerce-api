@@ -1,9 +1,7 @@
 package com.project.springecommerceapi.entity;
 
-import java.util.Date;
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Column;

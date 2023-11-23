@@ -77,7 +77,9 @@ public class AuthServiceImpl implements IAuthService {
     }
 
     @Override
-    public void requestEmailVerification(User user) {
+    public void requestEmailVerification() {
+        User user = userService.getAuthenticatedUser();
+
         if (user.getEmailVerified() == true) {
             throw new AlreadyVerifiedEmailException();
         }
