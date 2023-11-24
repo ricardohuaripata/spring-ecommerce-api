@@ -61,6 +61,12 @@ Inicia sesión para obtener un token de autenticación.
 ```http
   POST /api/v1/login
 ```
+
+##### Parámetros
+| Tipo     | Nombre      | Descripción              |
+|----------|-------------|--------------------------|
+| `Body`   | `loginDto` | Credenciales de inicio de sesión |
+
 ##### Ejemplo de solicitud
 
 ```json
@@ -69,11 +75,6 @@ Inicia sesión para obtener un token de autenticación.
     "password": "Usuario9.Pass"
 }
 ```
-
-##### Parámetros
-| Tipo     | Nombre      | Descripción              |
-|----------|-------------|--------------------------|
-| `Body`   | `loginDto` | Credenciales de inicio de sesión |
 
 #### Verificar Email
 
@@ -96,6 +97,11 @@ Solicita restablecer la contraseña olvidada del usuario.
   POST /api/v1/forgot-password
 ```
 
+##### Parámetros
+| Tipo     | Nombre      | Descripción              |
+|----------|-------------|--------------------------|
+| `Body`   | `forgotPasswordDto` | Email del usuario |
+
 ##### Ejemplo de solicitud
 
 ```json
@@ -103,11 +109,6 @@ Solicita restablecer la contraseña olvidada del usuario.
     "email": "ricardohuaripatabellido@gmail.com"
 }
 ```
-
-##### Parámetros
-| Tipo     | Nombre      | Descripción              |
-|----------|-------------|--------------------------|
-| `Body`   | `forgotPasswordDto` | Email del usuario |
 
 #### Reiniciar Contraseña
 
