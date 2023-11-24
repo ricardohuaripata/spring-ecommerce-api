@@ -3,7 +3,6 @@ package com.project.springecommerceapi.dto;
 import java.util.UUID;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -5,7 +5,6 @@ import com.project.springecommerceapi.annotation.ValidEmail;
 import com.project.springecommerceapi.annotation.ValidPassword;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;

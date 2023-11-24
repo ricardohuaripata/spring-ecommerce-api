@@ -37,7 +37,9 @@ public class OrderController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> createOrder(@RequestBody @Valid OrderDto orderDto) {
+    @ApiOperation(value = "Create Order", notes = "Create a new order")
+    public ResponseEntity<?> createOrder(
+            @ApiParam(value = "Order details", required = true) @RequestBody @Valid OrderDto orderDto) {
         OrderResponse createdOrder = orderService.createOrder(orderDto);
         return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
     }

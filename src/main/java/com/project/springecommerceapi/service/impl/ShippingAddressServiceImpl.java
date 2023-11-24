@@ -50,7 +50,7 @@ public class ShippingAddressServiceImpl implements IShippingAddressService {
     }
 
     @Override
-    public List<ShippingAddress> getShippingAddressListByUser() {
+    public List<ShippingAddress> getShippingAddressListByAuthenticatedUser() {
         User user = userService.getAuthenticatedUser();
         return shippingAddressRepository.findShippingAddressesByUser(user);
     }

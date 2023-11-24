@@ -12,6 +12,6 @@ public interface IShippingAddressService {
 
     ShippingAddress createNewShippingAddress(ShippingAddressDto shippingAddressDto);
 
-    List<ShippingAddress> getShippingAddressListByUser();
+    List<ShippingAddress> getShippingAddressListByAuthenticatedUser();
 
 }

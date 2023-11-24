@@ -22,6 +22,9 @@ import com.project.springecommerceapi.response.SuccessResponse;
 import com.project.springecommerceapi.security.JwtTokenService;
 import com.project.springecommerceapi.service.impl.AuthServiceImpl;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 import javax.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
@@ -54,13 +57,17 @@ public class AuthController {
     }
 
     @PostMapping("/verify-email/{token}")
-    public ResponseEntity<?> verifyEmail(@PathVariable("token") String token) {
+    @ApiOperation(value = "Verify Email", notes = "Verify user's email using a email-verification token")
+    public ResponseEntity<?> verifyEmail(
+            @ApiParam(value = "Token for email verification", required = true) @PathVariable("token") String token) {
         User user = authService.verifyEmail(token);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PostMapping("/forgot-password")
-    public ResponseEntity<?> forgotPassword(@RequestBody @Valid ForgotPasswordDto forgotPasswordDto) {
+    @ApiOperation(value = "Forgot Password", notes = "Request to reset the user's forgotten password")
+    public ResponseEntity<?> forgotPassword(
+            @ApiParam(value = "Details for resetting password", required = true) @RequestBody @Valid ForgotPasswordDto forgotPasswordDto) {
         authService.forgotPassword(forgotPasswordDto);
         SuccessResponse successResponse = SuccessResponse.builder()
                 .type("Success")
@@ -70,8 +77,10 @@ public class AuthController {
     }
 
     @PostMapping("/reset-password/{token}")
-    public ResponseEntity<?> resetPassword(@RequestBody @Valid ResetPasswordDto resetPasswordDto,
-            @PathVariable("token") String token) {
+    @ApiOperation(value = "Reset Password", notes = "Reset user's password using a password-reset token")
+    public ResponseEntity<?> resetPassword(
+            @ApiParam(value = "Details for resetting password", required = true) @RequestBody @Valid ResetPasswordDto resetPasswordDto,
+            @ApiParam(value = "Token for resetting password", required = true) @PathVariable("token") String token) {
         User user = authService.resetPassword(token, resetPasswordDto);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }

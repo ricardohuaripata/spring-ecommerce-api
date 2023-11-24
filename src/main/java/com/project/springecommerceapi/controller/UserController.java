@@ -23,6 +23,8 @@ import com.project.springecommerceapi.service.impl.AuthServiceImpl;
 import com.project.springecommerceapi.service.impl.ShippingAddressServiceImpl;
 import com.project.springecommerceapi.service.impl.UserServiceImpl;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -41,26 +43,29 @@ public class UserController {
     }
 
     @GetMapping("/account/info")
+    @ApiOperation(value = "Show Authenticated User Profile", notes = "Retrieve user's profile information")
     public ResponseEntity<?> showUserProfile() {
         User user = userService.getAuthenticatedUser();
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @GetMapping("/account/shipping-address")
+    @ApiOperation(value = "Get User's Shipping Addresses", notes = "Retrieve list of user's shipping addresses")
     public ResponseEntity<?> getShippingAddressList() {
-
-        List<ShippingAddress> shippingAddressList = shippingAddressService.getShippingAddressListByUser();
-
+        List<ShippingAddress> shippingAddressList = shippingAddressService.getShippingAddressListByAuthenticatedUser();
         return new ResponseEntity<>(shippingAddressList, HttpStatus.OK);
     }
 
     @PostMapping("/account/shipping-address")
-    public ResponseEntity<?> createNewShippingAddress(@RequestBody @Valid ShippingAddressDto shippingAddressDto) {
+    @ApiOperation(value = "Create Shipping Address", notes = "Create a new shipping address for the user")
+    public ResponseEntity<?> createNewShippingAddress(
+            @ApiParam(value = "Details of new shipping address", required = true) @RequestBody @Valid ShippingAddressDto shippingAddressDto) {
         ShippingAddress createdShippingAddress = shippingAddressService.createNewShippingAddress(shippingAddressDto);
         return new ResponseEntity<>(createdShippingAddress, HttpStatus.CREATED);
     }
 
     @PostMapping("/account/email-verification")
+    @ApiOperation(value = "Request Email Verification", notes = "Request email verification for the user")
     public ResponseEntity<?> requestEmailVerification() {
         authService.requestEmailVerification();
         SuccessResponse successResponse = SuccessResponse.builder()

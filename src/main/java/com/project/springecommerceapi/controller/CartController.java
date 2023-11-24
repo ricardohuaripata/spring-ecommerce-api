@@ -16,6 +16,9 @@ import com.project.springecommerceapi.entity.Cart;
 import com.project.springecommerceapi.response.SuccessResponse;
 import com.project.springecommerceapi.service.impl.CartServiceImpl;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 import java.util.UUID;
 
 import javax.validation.Valid;
@@ -35,20 +38,25 @@ public class CartController {
     }
 
     @PostMapping()
+    @ApiOperation(value = "Create Cart", notes = "Create a new shopping cart")
     public ResponseEntity<?> createCart() {
         Cart createdCart = cartService.createCart();
         return new ResponseEntity<>(createdCart, HttpStatus.CREATED);
     }
 
     @PatchMapping("/{cartId}")
-    public ResponseEntity<?> addToCart(@PathVariable("cartId") UUID cartId,
-            @RequestBody @Valid CartItemDto cartItemDto) {
+    @ApiOperation(value = "Add to Cart", notes = "Add an item to the shopping cart")
+    public ResponseEntity<?> addToCart(
+            @ApiParam(value = "ID of the cart", required = true) @PathVariable("cartId") UUID cartId,
+            @ApiParam(value = "Product Variant to be added", required = true) @RequestBody @Valid CartItemDto cartItemDto) {
         Cart cart = cartService.createCartItem(cartId, cartItemDto);
         return new ResponseEntity<>(cart, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{cartId}/items")
-    public ResponseEntity<?> clearCart(@PathVariable("cartId") UUID cartId) {
+    @ApiOperation(value = "Clear Cart", notes = "Clear all items from the cart")
+    public ResponseEntity<?> clearCart(
+            @ApiParam(value = "ID of the cart", required = true) @PathVariable("cartId") UUID cartId) {
         cartService.clearCart(cartId);
         SuccessResponse successResponse = SuccessResponse.builder()
                 .type("Success")
@@ -58,12 +66,15 @@ public class CartController {
     }
 
     @DeleteMapping("/items/{cartItemId}")
-    public ResponseEntity<?> deleteCartItem(@PathVariable("cartItemId") UUID cartItemId) {
+    @ApiOperation(value = "Delete Cart Item", notes = "Delete a specific item from the cart")
+    public ResponseEntity<?> deleteCartItem(
+            @ApiParam(value = "ID of the cart item", required = true) @PathVariable("cartItemId") UUID cartItemId) {
         Cart cart = cartService.deleteCartItem(cartItemId);
         return new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
     @DeleteMapping()
+    @ApiOperation(value = "Delete Expired Carts", notes = "Delete expired shopping carts")
     public ResponseEntity<?> deleteExpiredCarts() {
         int deletedCarts = cartService.deleteExpiredCarts();
         SuccessResponse successResponse = SuccessResponse.builder()
