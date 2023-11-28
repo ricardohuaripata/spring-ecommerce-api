@@ -1,5 +1,5 @@
 
-# Ecommerce API REST
+# Ecommerce RESTful API
 
 Este proyecto es una API REST desarrollada en Spring Boot que ofrece funcionalidades para un ecommerce de ropa. Permite gestionar productos, pedidos, usuarios y autenticación, entre otras características.
 ## Tecnologías Utilizadas
@@ -25,6 +25,11 @@ Este proyecto es una API REST desarrollada en Spring Boot que ofrece funcionalid
 **Java JWT (JSON Web Tokens):** Utilizado para la generación y validación de tokens JWT para autenticación.
 
 **Stripe Java:** Biblioteca para interactuar con la API de Stripe, utilizada para procesar pagos.
+
+## Database Diagram
+
+![alt text](db-diagram.png)
+
 ## API Reference
 
 ### Autenticación
