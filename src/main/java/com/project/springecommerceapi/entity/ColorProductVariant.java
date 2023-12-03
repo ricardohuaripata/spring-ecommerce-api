@@ -2,15 +2,19 @@ package com.project.springecommerceapi.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -48,11 +52,8 @@ public class ColorProductVariant {
     @Column(name = "final_price", nullable = false, precision = 10, scale = 2)
     private BigDecimal finalPrice;
 
-    @Column(name = "front_image_url", nullable = false, columnDefinition = "TEXT")
-    private String frontImageUrl;
-
-    @Column(name = "back_image_url", nullable = false, columnDefinition = "TEXT")
-    private String backImageUrl;
+    @OneToMany(mappedBy = "colorProductVariant")
+    private List<ProductImage> productImageList;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private Date dateCreated;

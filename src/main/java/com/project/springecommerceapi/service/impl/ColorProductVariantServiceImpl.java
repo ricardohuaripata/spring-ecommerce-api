@@ -60,8 +60,6 @@ public class ColorProductVariantServiceImpl implements IColorProductVariantServi
         newColorProductVariant.setColor(color);
         newColorProductVariant.setBasePrice(colorProductVariantDto.getBasePrice());
         newColorProductVariant.setFinalPrice(colorProductVariantDto.getFinalPrice());
-        newColorProductVariant.setFrontImageUrl(colorProductVariantDto.getFrontImageUrl());
-        newColorProductVariant.setBackImageUrl(colorProductVariantDto.getBackImageUrl());
         Date currentDate = new Date();
         newColorProductVariant.setDateCreated(currentDate);
         newColorProductVariant.setDateLastModified(currentDate);

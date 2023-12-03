@@ -95,7 +95,7 @@ public class EmailServiceImpl implements IEmailService {
         for (OrderItem item : orderResponse.getOrderItems()) {
             buildedMail.append("<div style=\"padding: 20px;margin-top: 20px;\">");
             buildedMail.append("<div style=\"margin-bottom: 0;\">");
-            buildedMail.append("<img src=\"").append(item.getSizeColorProductVariant().getColorProductVariant().getFrontImageUrl()).append("\" alt=\"").append(item.getSizeColorProductVariant().getColorProductVariant().getProduct().getTitle()).append("\" style=\"width: 100px; height: auto; margin-right: 10px; display: inline-block;\">");
+            //buildedMail.append("<img src=\"").append(item.getSizeColorProductVariant().getColorProductVariant().getFrontImageUrl()).append("\" alt=\"").append(item.getSizeColorProductVariant().getColorProductVariant().getProduct().getTitle()).append("\" style=\"width: 100px; height: auto; margin-right: 10px; display: inline-block;\">");
             buildedMail.append("<div style=\"display: inline-block; vertical-align: top;\">");
             buildedMail.append("<p style=\"margin: 0; font-size: 16px;\"><strong>").append(item.getSizeColorProductVariant().getColorProductVariant().getProduct().getTitle()).append("</strong></p>");
             buildedMail.append("<p style=\"margin: 10px; font-size: 14px;\">Quantity: ").append(item.getQuantity()).append("</p>");
