@@ -39,4 +39,7 @@ public class ProductImage {
 
     @Column(name = "file_name", length = 128, nullable = false)
     private String fileName;
+
+    @Column(name = "order_position", nullable = false)
+    private int orderPosition;
 }

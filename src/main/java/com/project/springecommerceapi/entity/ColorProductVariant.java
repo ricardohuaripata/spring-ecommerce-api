@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -53,6 +54,7 @@ public class ColorProductVariant {
     private BigDecimal finalPrice;
 
     @OneToMany(mappedBy = "colorProductVariant")
+    @OrderBy("order_position ASC")
     private List<ProductImage> productImageList;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")

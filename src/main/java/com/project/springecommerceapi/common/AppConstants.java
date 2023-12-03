@@ -51,5 +51,6 @@ public class AppConstants {
     public static final String PAYMENT_TRANSACTION_FAILED = "The payment transaction failed.";
     public static final String INVALID_OPERATION = "You cannot perform this operation.";
     public static final String SUCCESSFUL_ORDER = "Thanks for your purchase";
+    public static final String INVALID_IMAGE_FILE = "Invalid file type, only (.jpeg, .jpg, .png) will be supported.";
 
 }

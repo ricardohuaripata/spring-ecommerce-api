@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.project.springecommerceapi.dto.ColorProductVariantDto;
 import com.project.springecommerceapi.entity.Category;
 import com.project.springecommerceapi.entity.ColorProductVariant;
 import com.project.springecommerceapi.entity.Product;
+import com.project.springecommerceapi.entity.ProductImage;
 import com.project.springecommerceapi.service.impl.CategoryServiceImpl;
 import com.project.springecommerceapi.service.impl.ColorProductVariantServiceImpl;
 import com.project.springecommerceapi.service.impl.ProductServiceImpl;
@@ -79,6 +81,18 @@ public class ColorProductVariantController {
                                 .getColorProductVariantsByProductCategoryPaginate(category, page, size);
 
                 return new ResponseEntity<>(colorProductVariants, HttpStatus.OK);
+        }
+
+        @PostMapping("/{colorProductVariantId}")
+        public ResponseEntity<?> uploadProductImage(
+                        @PathVariable("colorProductVariantId") UUID colorProductVariantId,
+                        @RequestParam(value = "file") MultipartFile file,
+                        @RequestParam(value = "orderPosition") int orderPosition) {
+
+                ProductImage productImage = colorProductVariantService.uploadProductImage(colorProductVariantId, file,
+                                orderPosition);
+
+                return new ResponseEntity<>(productImage, HttpStatus.CREATED);
         }
 
 }
