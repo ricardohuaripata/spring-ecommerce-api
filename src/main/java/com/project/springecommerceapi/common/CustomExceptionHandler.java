@@ -33,6 +33,7 @@ import com.project.springecommerceapi.exceptions.ColorNotFoundException;
 import com.project.springecommerceapi.exceptions.ColorProductVariantExistsException;
 import com.project.springecommerceapi.exceptions.ColorProductVariantNotFoundException;
 import com.project.springecommerceapi.exceptions.EmailExistsException;
+import com.project.springecommerceapi.exceptions.FileUploadException;
 import com.project.springecommerceapi.exceptions.NoItemsToPayException;
 import com.project.springecommerceapi.exceptions.HexcodeExistsException;
 import com.project.springecommerceapi.exceptions.InvalidImageFileException;
@@ -260,6 +261,11 @@ public class CustomExceptionHandler {
     @ExceptionHandler(InvalidImageFileException.class)
     public ResponseEntity<ErrorResponse> handleInvalidImageFileException(InvalidImageFileException e) {
         return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.INVALID_IMAGE_FILE, null);
+    }
+
+    @ExceptionHandler(FileUploadException.class)
+    public ResponseEntity<ErrorResponse> handleFileUploadException(FileUploadException e) {
+        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, AppConstants.FILE_UPLOAD_FAILED, null);
     }
 
 }
