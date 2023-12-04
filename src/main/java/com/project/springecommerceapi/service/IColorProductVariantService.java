@@ -4,25 +4,18 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.project.springecommerceapi.dto.ColorProductVariantDto;
-import com.project.springecommerceapi.entity.Category;
 import com.project.springecommerceapi.entity.ColorProductVariant;
-import com.project.springecommerceapi.entity.Product;
-import com.project.springecommerceapi.entity.ProductImage;
 
 public interface IColorProductVariantService {
     
     ColorProductVariant getColorProductVariantById(UUID colorProductVariantId);
 
-    List<ColorProductVariant> getColorProductVariantsByProduct(Product product);
+    List<ColorProductVariant> getColorProductVariantsByProduct(UUID productId);
 
-    Page<ColorProductVariant> getColorProductVariantsByProductCategoryPaginate(Category category, Integer page,
+    Page<ColorProductVariant> getColorProductVariantsByProductCategoryPaginate(UUID categoryId, Integer page,
             Integer size);
 
     ColorProductVariant createColorProductVariant(ColorProductVariantDto colorProductVariantDto);
-
-    ProductImage uploadProductImage(UUID colorProductVariantId, MultipartFile file, int orderPosition);
-
 }

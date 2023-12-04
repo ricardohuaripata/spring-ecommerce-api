@@ -32,7 +32,9 @@ public class SizeColorProductVariantServiceImpl implements ISizeColorProductVari
 
     @Override
     public List<SizeColorProductVariant> getSizeColorProductVariantsByColorProductVariant(
-            ColorProductVariant colorProductVariant) {
+            UUID colorProductVariantId) {
+        ColorProductVariant colorProductVariant = colorProductVariantService
+                .getColorProductVariantById(colorProductVariantId);
         return sizeColorProductVariantRepository.findSizeColorProductVariantsByColorProductVariant(colorProductVariant);
 
     }

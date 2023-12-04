@@ -71,7 +71,8 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public Page<Product> getProductsByCategoryPaginate(Category category, Integer page, Integer size) {
+    public Page<Product> getProductsByCategoryPaginate(UUID categoryId, Integer page, Integer size) {
+        Category category = categoryService.getCategoryById(categoryId);
         return productRepository.findProductsByCategory(category, PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "dateCreated")));
     }
 

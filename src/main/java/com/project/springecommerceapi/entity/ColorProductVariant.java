@@ -54,7 +54,7 @@ public class ColorProductVariant {
     private BigDecimal finalPrice;
 
     @OneToMany(mappedBy = "colorProductVariant")
-    @OrderBy("order_position ASC")
+    @OrderBy("date_created ASC")
     private List<ProductImage> productImageList;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")

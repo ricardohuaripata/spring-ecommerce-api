@@ -1,9 +1,6 @@
 package com.project.springecommerceapi.service.impl;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +15,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
+
 import com.project.springecommerceapi.exceptions.FileUploadException;
 import com.project.springecommerceapi.service.IStorageService;
 
@@ -72,16 +70,6 @@ public class StorageServiceImpl implements IStorageService {
     public String deleteFile(String fileName) {
         s3Client.deleteObject(bucketName, fileName);
         return fileName + " removed ...";
-    }
-
-    private File convertMultiPartFileToFile(MultipartFile file) {
-        File convertedFile = new File(file.getOriginalFilename());
-        try (FileOutputStream fos = new FileOutputStream(convertedFile)) {
-            fos.write(file.getBytes());
-        } catch (IOException e) {
-            log.error("Error converting multipartFile to file", e);
-        }
-        return convertedFile;
     }
 
     @Override

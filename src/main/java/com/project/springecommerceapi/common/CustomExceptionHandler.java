@@ -42,6 +42,7 @@ import com.project.springecommerceapi.exceptions.InvalidTokenException;
 import com.project.springecommerceapi.exceptions.NotEnoughStockException;
 import com.project.springecommerceapi.exceptions.OrderNotFoundException;
 import com.project.springecommerceapi.exceptions.PaymentTransactionFailedException;
+import com.project.springecommerceapi.exceptions.ProductImageNotFoundException;
 import com.project.springecommerceapi.exceptions.ProductNotFoundException;
 import com.project.springecommerceapi.exceptions.SizeColorProductVariantExistsException;
 import com.project.springecommerceapi.exceptions.SizeColorProductVariantNotFoundException;
@@ -188,6 +189,11 @@ public class CustomExceptionHandler {
     @ExceptionHandler(OrderNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleOrderNotFoundException(OrderNotFoundException e) {
         return buildErrorResponse(HttpStatus.NOT_FOUND, AppConstants.ORDER_NOT_FOUND, null);
+    }
+
+    @ExceptionHandler(ProductImageNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleProductImageNotFoundException(ProductImageNotFoundException e) {
+        return buildErrorResponse(HttpStatus.NOT_FOUND, AppConstants.PRODUCT_IMAGE_NOT_FOUND, null);
     }
 
     // EXISTS EXCEPTIONS

@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,13 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.springecommerceapi.dto.ColorProductVariantDto;
-import com.project.springecommerceapi.entity.Category;
 import com.project.springecommerceapi.entity.ColorProductVariant;
-import com.project.springecommerceapi.entity.Product;
 import com.project.springecommerceapi.entity.ProductImage;
-import com.project.springecommerceapi.service.impl.CategoryServiceImpl;
+import com.project.springecommerceapi.response.SuccessResponse;
 import com.project.springecommerceapi.service.impl.ColorProductVariantServiceImpl;
-import com.project.springecommerceapi.service.impl.ProductServiceImpl;
+import com.project.springecommerceapi.service.impl.ProductImageServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -33,9 +32,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ColorProductVariantController {
 
-        private final ProductServiceImpl productService;
         private final ColorProductVariantServiceImpl colorProductVariantService;
-        private final CategoryServiceImpl categoryService;
+        private final ProductImageServiceImpl productImageService;
 
         @GetMapping("/{colorProductVariantId}")
         public ResponseEntity<?> getColorProductVariantById(
@@ -59,10 +57,9 @@ public class ColorProductVariantController {
 
         @GetMapping("/product/{productId}")
         public ResponseEntity<?> getColorProductVariantsByProduct(@PathVariable("productId") UUID productId) {
-                Product product = productService.getProductById(productId);
 
                 List<ColorProductVariant> colorProductVariants = colorProductVariantService
-                                .getColorProductVariantsByProduct(product);
+                                .getColorProductVariantsByProduct(productId);
 
                 return new ResponseEntity<>(colorProductVariants, HttpStatus.OK);
         }
@@ -75,10 +72,8 @@ public class ColorProductVariantController {
                 page = page != null && page >= 0 ? page : 0;
                 size = size != null && size > 0 ? size : 5;
 
-                Category category = categoryService.getCategoryById(categoryId);
-
                 Page<ColorProductVariant> colorProductVariants = colorProductVariantService
-                                .getColorProductVariantsByProductCategoryPaginate(category, page, size);
+                                .getColorProductVariantsByProductCategoryPaginate(categoryId, page, size);
 
                 return new ResponseEntity<>(colorProductVariants, HttpStatus.OK);
         }
@@ -86,13 +81,23 @@ public class ColorProductVariantController {
         @PostMapping("/{colorProductVariantId}")
         public ResponseEntity<?> uploadProductImage(
                         @PathVariable("colorProductVariantId") UUID colorProductVariantId,
-                        @RequestParam(value = "file") MultipartFile file,
-                        @RequestParam(value = "orderPosition") int orderPosition) {
+                        @RequestParam(value = "image") MultipartFile image) {
 
-                ProductImage productImage = colorProductVariantService.uploadProductImage(colorProductVariantId, file,
-                                orderPosition);
+                ProductImage productImage = productImageService.uploadProductImage(colorProductVariantId, image);
 
                 return new ResponseEntity<>(productImage, HttpStatus.CREATED);
+        }
+
+        @DeleteMapping("/images/{productImageId}")
+        public ResponseEntity<?> deleteProductImage(
+                        @PathVariable("productImageId") Long productImageId) {
+
+                String message = productImageService.deleteProductImage(productImageId);
+                SuccessResponse successResponse = SuccessResponse.builder()
+                                .type("Success")
+                                .message(message)
+                                .build();
+                return new ResponseEntity<>(successResponse, HttpStatus.OK);
         }
 
 }

@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.springecommerceapi.dto.SizeColorProductVariantDto;
-import com.project.springecommerceapi.entity.ColorProductVariant;
 import com.project.springecommerceapi.entity.SizeColorProductVariant;
-import com.project.springecommerceapi.service.impl.ColorProductVariantServiceImpl;
 import com.project.springecommerceapi.service.impl.SizeColorProductVariantServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -28,7 +26,6 @@ import lombok.RequiredArgsConstructor;
 public class SizeColorProductVariantController {
 
         private final SizeColorProductVariantServiceImpl sizeColorProductVariantService;
-        private final ColorProductVariantServiceImpl colorProductVariantService;
 
         @GetMapping("/{sizeColorProductVariantId}")
         public ResponseEntity<?> getSizeColorProductVariantById(
@@ -54,11 +51,8 @@ public class SizeColorProductVariantController {
         public ResponseEntity<?> getSizeColorProductVariantsByColorProductVariant(
                         @PathVariable("colorProductVariantId") UUID colorProductVariantId) {
 
-                ColorProductVariant colorProductVariant = colorProductVariantService
-                                .getColorProductVariantById(colorProductVariantId);
-
                 List<SizeColorProductVariant> sizeColorProductVariants = sizeColorProductVariantService
-                                .getSizeColorProductVariantsByColorProductVariant(colorProductVariant);
+                                .getSizeColorProductVariantsByColorProductVariant(colorProductVariantId);
 
                 return new ResponseEntity<>(sizeColorProductVariants, HttpStatus.OK);
         }

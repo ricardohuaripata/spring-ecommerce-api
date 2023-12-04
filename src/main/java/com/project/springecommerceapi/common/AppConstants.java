@@ -36,6 +36,7 @@ public class AppConstants {
     public static final String CART_NOT_FOUND = "No cart found.";
     public static final String CART_ITEM_NOT_FOUND = "No cart item found.";
     public static final String ORDER_NOT_FOUND = "No order found.";
+    public static final String PRODUCT_IMAGE_NOT_FOUND = "No product image found.";
 
     public static final String EMAIL_EXISTS = "User exists with this email address.";
     public static final String SLUG_EXISTS = "Slug already exists.";
@@ -51,7 +52,7 @@ public class AppConstants {
     public static final String PAYMENT_TRANSACTION_FAILED = "The payment transaction failed.";
     public static final String INVALID_OPERATION = "You cannot perform this operation.";
     public static final String SUCCESSFUL_ORDER = "Thanks for your purchase";
-    public static final String INVALID_IMAGE_FILE = "Invalid file type, only (.jpeg, .jpg, .png) will be supported.";
+    public static final String INVALID_IMAGE_FILE = "Invalid file type, only (jpeg, jpg, png) will be supported.";
     public static final String FILE_UPLOAD_FAILED = "Something went wrong when trying to upload a file.";
 
 }

@@ -1,6 +1,9 @@
 package com.project.springecommerceapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,6 +43,6 @@ public class ProductImage {
     @Column(name = "file_name", length = 128, nullable = false)
     private String fileName;
 
-    @Column(name = "order_position", nullable = false)
-    private int orderPosition;
+    @JsonIgnore
+    private Date dateCreated;
 }

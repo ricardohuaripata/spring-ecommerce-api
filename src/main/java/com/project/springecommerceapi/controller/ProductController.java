@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.springecommerceapi.dto.ProductDto;
-import com.project.springecommerceapi.entity.Category;
 import com.project.springecommerceapi.entity.Product;
-import com.project.springecommerceapi.service.impl.CategoryServiceImpl;
 import com.project.springecommerceapi.service.impl.ProductServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -29,7 +27,6 @@ import lombok.RequiredArgsConstructor;
 public class ProductController {
     
     private final ProductServiceImpl productService;
-    private final CategoryServiceImpl categoryService;
 
     @GetMapping()
     public ResponseEntity<?> getAllProducts(
@@ -57,10 +54,11 @@ public class ProductController {
     public ResponseEntity<?> getProductsByCategory(@PathVariable("categoryId") UUID categoryId,
             @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
             @RequestParam(name = "size", required = false, defaultValue = "5") Integer size) {
+
         page = page != null && page >= 0 ? page : 0;
         size = size != null && size > 0 ? size : 5;
-        Category category = categoryService.getCategoryById(categoryId);
-        Page<Product> productListPage = productService.getProductsByCategoryPaginate(category, page, size);
+
+        Page<Product> productListPage = productService.getProductsByCategoryPaginate(categoryId, page, size);
         return new ResponseEntity<>(productListPage, HttpStatus.OK);
     }
 
