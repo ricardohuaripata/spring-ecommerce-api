@@ -1,24 +1,33 @@
 package com.project.springecommerceapi.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
 import javax.validation.Valid;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.springecommerceapi.dto.ColorProductVariantDto;
+import com.project.springecommerceapi.dto.ProductDto;
+import com.project.springecommerceapi.dto.UpdateColorProductVariantDto;
 import com.project.springecommerceapi.entity.ColorProductVariant;
 import com.project.springecommerceapi.entity.ProductImage;
 import com.project.springecommerceapi.response.SuccessResponse;
@@ -45,12 +54,35 @@ public class ColorProductVariantController {
                 return new ResponseEntity<>(colorProductVariant, HttpStatus.OK);
         }
 
+        @PutMapping("/{colorProductVariantId}")
+        public ResponseEntity<?> updateColorProductVariantDetails(
+                        @PathVariable("colorProductVariantId") UUID colorProductVariantId,
+                        @RequestBody @Valid UpdateColorProductVariantDto updateColorProductVariantDto) {
+
+                ColorProductVariant updatedColorProductVariant = colorProductVariantService
+                                .updateColorProductVariantDetails(colorProductVariantId, updateColorProductVariantDto);
+
+                return new ResponseEntity<>(updatedColorProductVariant, HttpStatus.OK);
+        }
+
+        @PatchMapping("/{colorProductVariantId}")
+        public ResponseEntity<?> updateColorProductVariantMainImage(
+                        @PathVariable("colorProductVariantId") UUID colorProductVariantId,
+                        @RequestParam("image") MultipartFile image) {
+
+                ColorProductVariant updatedColorProductVariant = colorProductVariantService
+                                .updateColorProductVariantMainImage(colorProductVariantId, image);
+
+                return new ResponseEntity<>(updatedColorProductVariant, HttpStatus.OK);
+        }
+
         @PostMapping()
         public ResponseEntity<?> createColorProductVariant(
-                        @RequestBody @Valid ColorProductVariantDto colorProductVariantDto) {
+                        @RequestPart("data") @Valid ColorProductVariantDto colorProductVariantDto,
+                        @RequestPart("image") MultipartFile image) {
 
                 ColorProductVariant createdColorProductVariant = colorProductVariantService
-                                .createColorProductVariant(colorProductVariantDto);
+                                .createColorProductVariant(colorProductVariantDto, image);
 
                 return new ResponseEntity<>(createdColorProductVariant, HttpStatus.CREATED);
         }
@@ -81,7 +113,7 @@ public class ColorProductVariantController {
         @PostMapping("/{colorProductVariantId}")
         public ResponseEntity<?> uploadProductImage(
                         @PathVariable("colorProductVariantId") UUID colorProductVariantId,
-                        @RequestParam(value = "image") MultipartFile image) {
+                        @RequestParam("image") MultipartFile image) {
 
                 ProductImage productImage = productImageService.uploadProductImage(colorProductVariantId, image);
 

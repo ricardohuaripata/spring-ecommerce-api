@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -52,6 +53,13 @@ public class ColorProductVariant {
 
     @Column(name = "final_price", nullable = false, precision = 10, scale = 2)
     private BigDecimal finalPrice;
+
+    @Column(name = "main_image_url", nullable = true, columnDefinition = "TEXT")
+    private String mainImageUrl;
+
+    @JsonIgnore
+    @Column(name = "main_image_name", nullable = true, columnDefinition = "TEXT")
+    private String mainImageName;
 
     @OneToMany(mappedBy = "colorProductVariant")
     @OrderBy("date_created ASC")

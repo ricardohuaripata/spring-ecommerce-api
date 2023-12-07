@@ -9,7 +9,7 @@ import com.project.springecommerceapi.entity.ProductImage;
 public interface IProductImageService {
     ProductImage getProductImageById(Long productImageId);
 
-    ProductImage uploadProductImage(UUID colorProductVariantId, MultipartFile file);
+    ProductImage uploadProductImage(UUID colorProductVariantId, MultipartFile imageFile);
 
     String deleteProductImage(Long productImageId);
 

@@ -36,15 +36,15 @@ public class ProductImageServiceImpl implements IProductImageService {
     }
 
     @Override
-    public ProductImage uploadProductImage(UUID colorProductVariantId, MultipartFile file) {
+    public ProductImage uploadProductImage(UUID colorProductVariantId, MultipartFile imageFile) {
         // Verificar el tipo de archivo
-        if (!allowedImageTypes.contains(file.getContentType())) {
+        if (!allowedImageTypes.contains(imageFile.getContentType())) {
             throw new InvalidImageFileException();
         }
 
         ColorProductVariant colorProductVariant = colorProductVariantService
                 .getColorProductVariantById(colorProductVariantId);
-        String uploadedFile = storageService.uploadFile(file);
+        String uploadedFile = storageService.uploadFile(imageFile);
 
         ProductImage productImage = new ProductImage();
 

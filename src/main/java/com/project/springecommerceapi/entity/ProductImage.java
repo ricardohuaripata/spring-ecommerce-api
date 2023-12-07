@@ -40,7 +40,7 @@ public class ProductImage {
     @Column(name = "file_url", nullable = false, columnDefinition = "TEXT")
     private String fileUrl;
 
-    @Column(name = "file_name", length = 128, nullable = false)
+    @Column(name = "file_name", nullable = false, columnDefinition = "TEXT")
     private String fileName;
 
     @JsonIgnore

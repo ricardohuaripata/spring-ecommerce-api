@@ -73,7 +73,7 @@ public class AuthController {
                 .type("Success")
                 .message(AppConstants.CHECK_EMAIL)
                 .build();
-        return new ResponseEntity<>(successResponse, HttpStatus.OK);
+        return new ResponseEntity<>(successResponse, HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/reset-password/{token}")
