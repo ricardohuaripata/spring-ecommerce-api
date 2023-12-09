@@ -1,13 +1,9 @@
 package com.project.springecommerceapi.controller;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
 import javax.validation.Valid;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -26,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.springecommerceapi.dto.ColorProductVariantDto;
-import com.project.springecommerceapi.dto.ProductDto;
 import com.project.springecommerceapi.dto.UpdateColorProductVariantDto;
 import com.project.springecommerceapi.entity.ColorProductVariant;
 import com.project.springecommerceapi.entity.ProductImage;

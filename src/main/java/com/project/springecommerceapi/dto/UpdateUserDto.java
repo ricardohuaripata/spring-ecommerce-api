@@ -1,6 +1,7 @@
 package com.project.springecommerceapi.dto;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -14,33 +15,12 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShippingAddressDto {
-
-    @NotBlank
+public class UpdateUserDto {
+    @Pattern(regexp = "^(\\s*\\S\\s*)*$", message = "Firstname cant't be blank")
     @Size(min = 2, max = 64)
     private String firstName;
 
-    @NotBlank
+    @Pattern(regexp = "^(\\s*\\S\\s*)*$", message = "Lastname cant't be blank")
     @Size(min = 2, max = 64)
     private String lastName;
-
-    @NotBlank
-    @Size(max = 64)
-    private String country;
-
-    @NotBlank
-    @Size(max = 64)
-    private String city;
-
-    @NotBlank
-    @Size(max = 10)
-    private String postalCode;
-
-    @NotBlank
-    @Size(max = 1024)
-    private String address;
-
-    @NotBlank
-    @Size(max = 20)
-    private String contactPhone;
 }

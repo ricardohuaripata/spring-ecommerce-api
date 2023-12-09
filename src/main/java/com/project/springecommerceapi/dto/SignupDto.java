@@ -30,10 +30,10 @@ public class SignupDto {
     private String passwordRepeat;
 
     @NotBlank
-    @Size(max = 64)
+    @Size(min = 2, max = 64)
     private String firstName;
 
     @NotBlank
-    @Size(max = 64)
+    @Size(min = 2, max = 64)
     private String lastName;
 }

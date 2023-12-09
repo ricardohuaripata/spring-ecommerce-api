@@ -1,6 +1,8 @@
 package com.project.springecommerceapi.dto;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -14,33 +16,32 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShippingAddressDto {
-
-    @NotBlank
+public class UpdateShippingAddressDto {
+    @Pattern(regexp = "^(\\s*\\S\\s*)*$", message = "Firstname cant't be blank")
     @Size(min = 2, max = 64)
     private String firstName;
 
-    @NotBlank
+    @Pattern(regexp = "^(\\s*\\S\\s*)*$", message = "Lastname cant't be blank")
     @Size(min = 2, max = 64)
     private String lastName;
 
-    @NotBlank
+    @Pattern(regexp = "^(?!\\s*$)\\s*\\S.*$", message = "Country cant't be blank")
     @Size(max = 64)
     private String country;
 
-    @NotBlank
+    @Pattern(regexp = "^(?!\\s*$)\\s*\\S.*$", message = "City cant't be blank")
     @Size(max = 64)
     private String city;
 
-    @NotBlank
+    @Pattern(regexp = "^(?!\\s*$)\\s*\\S.*$", message = "Postal code cant't be blank")
     @Size(max = 10)
     private String postalCode;
 
-    @NotBlank
+    @Pattern(regexp = "^(?!\\s*$)\\s*\\S.*$", message = "Address cant't be blank")
     @Size(max = 1024)
     private String address;
 
-    @NotBlank
+    @Pattern(regexp = "^(?!\\s*$)\\s*\\S.*$", message = "Contact phone cant't be blank")
     @Size(max = 20)
     private String contactPhone;
 }

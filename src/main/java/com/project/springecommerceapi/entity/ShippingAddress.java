@@ -41,10 +41,10 @@ public class ShippingAddress {
     private User user;
 
     @Column(length = 64, nullable = false)
-    private String firstname;
+    private String firstName;
 
     @Column(length = 64, nullable = false)
-    private String lastname;
+    private String lastName;
 
     @Column(length = 64, nullable = false)
     private String country;

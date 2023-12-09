@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.springecommerceapi.dto.ShippingAddressDto;
+import com.project.springecommerceapi.dto.UpdateShippingAddressDto;
 import com.project.springecommerceapi.entity.ShippingAddress;
 import com.project.springecommerceapi.entity.User;
+import com.project.springecommerceapi.exceptions.InvalidOperationException;
+import com.project.springecommerceapi.mapper.MapstructMapperShippingAddressUpdate;
 import com.project.springecommerceapi.repository.ShippingAddressRepository;
 import com.project.springecommerceapi.service.IShippingAddressService;
 
@@ -21,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class ShippingAddressServiceImpl implements IShippingAddressService {
     private final ShippingAddressRepository shippingAddressRepository;
     private final UserServiceImpl userService;
+    private final MapstructMapperShippingAddressUpdate mapstructMapperShippingAddressUpdate;
 
     @Override
     public ShippingAddress getShippingAddressById(UUID shippingAddressId) {
@@ -35,8 +39,8 @@ public class ShippingAddressServiceImpl implements IShippingAddressService {
         ShippingAddress newShippingAddress = new ShippingAddress();
 
         newShippingAddress.setUser(user);
-        newShippingAddress.setFirstname(shippingAddressDto.getFirstName());
-        newShippingAddress.setLastname(shippingAddressDto.getLastName());
+        newShippingAddress.setFirstName(shippingAddressDto.getFirstName());
+        newShippingAddress.setLastName(shippingAddressDto.getLastName());
         newShippingAddress.setCountry(shippingAddressDto.getCountry());
         newShippingAddress.setCity(shippingAddressDto.getCity());
         newShippingAddress.setPostalCode(shippingAddressDto.getPostalCode());
@@ -50,9 +54,42 @@ public class ShippingAddressServiceImpl implements IShippingAddressService {
     }
 
     @Override
-    public List<ShippingAddress> getShippingAddressListByAuthenticatedUser() {
-        User user = userService.getAuthenticatedUser();
-        return shippingAddressRepository.findShippingAddressesByUser(user);
+    public List<ShippingAddress> getAuthenticatedUserShippingAddressList() {
+        User authUser = userService.getAuthenticatedUser();
+        return authUser.getShippingAddressList();
+    }
+
+    @Override
+    public ShippingAddress updateShippingAddressDetails(UUID shippingAddressId,
+            UpdateShippingAddressDto updateShippingAddressDto) {
+
+        User authUser = userService.getAuthenticatedUser();
+
+        ShippingAddress shippingAddress = getShippingAddressById(shippingAddressId);
+
+        if (shippingAddress.getUser().equals(authUser)) {
+            mapstructMapperShippingAddressUpdate.updateShippingAddressFromUpdateShippingAddressDto(
+                    updateShippingAddressDto, shippingAddress);
+            shippingAddress.setDateLastModified(new Date());
+
+            return shippingAddressRepository.save(shippingAddress);
+        } else {
+            throw new InvalidOperationException();
+        }
+
+    }
+
+    @Override
+    public void deleteShippingAddress(UUID shippingAddressId) {
+        User authUser = userService.getAuthenticatedUser();
+        ShippingAddress shippingAddress = getShippingAddressById(shippingAddressId);
+
+        if (shippingAddress.getUser().equals(authUser)) {
+            shippingAddressRepository.delete(shippingAddress);
+
+        } else {
+            throw new InvalidOperationException();
+        }
     }
 
 }

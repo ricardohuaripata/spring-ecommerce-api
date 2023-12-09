@@ -60,7 +60,7 @@ public class CartController {
         cartService.clearCart(cartId);
         SuccessResponse successResponse = SuccessResponse.builder()
                 .type("Success")
-                .message("Cart cleared")
+                .message("Cart cleared.")
                 .build();
         return new ResponseEntity<>(successResponse, HttpStatus.OK);
     }

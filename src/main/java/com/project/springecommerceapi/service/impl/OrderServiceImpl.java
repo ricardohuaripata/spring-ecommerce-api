@@ -83,8 +83,8 @@ public class OrderServiceImpl implements IOrderService {
                     .user(order.getUser())
                     .status(order.getStatus())
                     .chargeId(order.getChargeId())
-                    .firstname(order.getFirstname())
-                    .lastname(order.getLastname())
+                    .firstName(order.getFirstName())
+                    .lastName(order.getLastName())
                     .country(order.getCountry())
                     .city(order.getCity())
                     .postalCode(order.getPostalCode())
@@ -160,8 +160,8 @@ public class OrderServiceImpl implements IOrderService {
         newOrder.setUser(user);
         newOrder.setStatus("pending");
         newOrder.setChargeId(charge.getId());
-        newOrder.setFirstname(orderDto.getFirstName());
-        newOrder.setLastname(orderDto.getLastName());
+        newOrder.setFirstName(orderDto.getFirstName());
+        newOrder.setLastName(orderDto.getLastName());
         newOrder.setCountry(orderDto.getCountry());
         newOrder.setCity(orderDto.getCity());
         newOrder.setPostalCode(orderDto.getPostalCode());
@@ -200,8 +200,8 @@ public class OrderServiceImpl implements IOrderService {
                 .user(createdOrder.getUser())
                 .status(createdOrder.getStatus())
                 .chargeId(createdOrder.getChargeId())
-                .firstname(createdOrder.getFirstname())
-                .lastname(createdOrder.getLastname())
+                .firstName(createdOrder.getFirstName())
+                .lastName(createdOrder.getLastName())
                 .country(createdOrder.getCountry())
                 .city(createdOrder.getCity())
                 .postalCode(createdOrder.getPostalCode())

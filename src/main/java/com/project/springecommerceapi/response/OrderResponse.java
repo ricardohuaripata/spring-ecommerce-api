@@ -21,8 +21,8 @@ public class OrderResponse {
     private User user;
     private String status;
     private String chargeId;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String country;
     private String city;
     private String postalCode;

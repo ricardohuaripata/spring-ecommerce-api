@@ -86,7 +86,7 @@ public class EmailServiceImpl implements IEmailService {
 
         buildedMail.append("<div style=\"margin: 0 auto; width: 600px; text-align: center; background: #ffffff;border: 3px solid #FFCC03;\">");
         buildedMail.append("<h2 style=\"background: #FFCC03; padding: 15px; margin: 0; font-weight: 700; font-size: 24px;\">Successful Order</h2>");
-        buildedMail.append("<p style=\"padding: 20px; font-size: 20px;margin-bottom: 0;margin-top: 30px;\">Hi ").append(orderResponse.getFirstname()).append(":</p>");
+        buildedMail.append("<p style=\"padding: 20px; font-size: 20px;margin-bottom: 0;margin-top: 30px;\">Hi ").append(orderResponse.getFirstName()).append(":</p>");
         buildedMail.append("<p style=\"padding: 20px; font-size: 24px;margin-bottom: 20px;margin-top: 0;\">Thanks for your purchase!</p>");
 
         // Order Items section
@@ -108,7 +108,7 @@ public class EmailServiceImpl implements IEmailService {
         buildedMail.append("<div>");
         buildedMail.append("<h2 style=\"background: #FFCC03; padding: 15px; margin: 0; font-weight: 700; font-size: 20px;\">Shipping Details</h2>");
         buildedMail.append("<div style=\"padding: 20px;\">");
-        buildedMail.append("<p style=\"margin: 10px; font-size: 16px;\">").append(orderResponse.getFirstname()).append(" ").append(orderResponse.getLastname()).append("</p>");
+        buildedMail.append("<p style=\"margin: 10px; font-size: 16px;\">").append(orderResponse.getFirstName()).append(" ").append(orderResponse.getLastName()).append("</p>");
         buildedMail.append("<p style=\"margin: 10px; font-size: 16px;\">").append(orderResponse.getContactPhone()).append("</p>");
         buildedMail.append("<p style=\"margin: 10px; font-size: 16px;\">").append(orderResponse.getCountry()).append("</p>");
         buildedMail.append("<p style=\"margin: 10px; font-size: 16px;\">").append(orderResponse.getCity()).append("</p>");
