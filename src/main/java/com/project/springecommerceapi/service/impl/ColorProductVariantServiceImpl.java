@@ -114,8 +114,11 @@ public class ColorProductVariantServiceImpl implements IColorProductVariantServi
         }
 
         ColorProductVariant colorProductVariant = getColorProductVariantById(colorProductVariantId);
-        storageService.deleteFile(colorProductVariant.getMainImageName());
-        
+        try {
+            storageService.deleteFile(colorProductVariant.getMainImageName());
+        } catch (Exception e) {
+        }
+
         String uploadedFile = storageService.uploadFile(imageFile);
         colorProductVariant.setMainImageUrl(storageService.getFileUrl(uploadedFile));
         colorProductVariant.setMainImageName(uploadedFile);

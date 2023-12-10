@@ -53,11 +53,11 @@ public class ColorProductVariant {
     @Column(name = "final_price", nullable = false, precision = 10, scale = 2)
     private BigDecimal finalPrice;
 
-    @Column(name = "main_image_url", nullable = true, columnDefinition = "TEXT")
+    @Column(name = "main_image_url", nullable = false, columnDefinition = "TEXT")
     private String mainImageUrl;
 
     @JsonIgnore
-    @Column(name = "main_image_name", nullable = true, columnDefinition = "TEXT")
+    @Column(name = "main_image_name", nullable = false, columnDefinition = "TEXT")
     private String mainImageName;
 
     @OneToMany(mappedBy = "colorProductVariant")
