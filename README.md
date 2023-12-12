@@ -28,7 +28,7 @@ Este proyecto es una API REST desarrollada en Spring Boot que ofrece funcionalid
 
 ## Database Diagram
 
-![alt text](db-diagram.png)
+![alt text](database-diagram.png)
 
 ## API Reference
 
