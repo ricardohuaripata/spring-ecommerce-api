@@ -1,8 +1,7 @@
 
-# Ecommerce API REST
+# Ecommerce RESTful API
 
 Este proyecto es una API REST desarrollada en Spring Boot que ofrece funcionalidades para un ecommerce de ropa. Permite gestionar productos, pedidos, usuarios y autenticación, entre otras características.
-
 ## Tecnologías Utilizadas
 
 **Spring Boot:** Plataforma de aplicación Java para crear aplicaciones independientes basadas en Spring.
@@ -27,7 +26,9 @@ Este proyecto es una API REST desarrollada en Spring Boot que ofrece funcionalid
 
 **Stripe Java:** Biblioteca para interactuar con la API de Stripe, utilizada para procesar pagos.
 
-**Amazon S3:** Servicio de almacenamiento en la nube que permite la subida y gestión de imágenes u otros archivos.
+## Database Diagram
+
+![alt text](db-diagram.png)
 
 ## API Reference
 
@@ -65,6 +66,12 @@ Inicia sesión para obtener un token de autenticación.
 ```http
   POST /api/v1/login
 ```
+
+##### Parámetros
+| Tipo     | Nombre      | Descripción              |
+|----------|-------------|--------------------------|
+| `Body`   | `loginDto` | Credenciales de inicio de sesión |
+
 ##### Ejemplo de solicitud
 
 ```json
@@ -73,11 +80,6 @@ Inicia sesión para obtener un token de autenticación.
     "password": "Usuario9.Pass"
 }
 ```
-
-##### Parámetros
-| Tipo     | Nombre      | Descripción              |
-|----------|-------------|--------------------------|
-| `Body`   | `loginDto` | Credenciales de inicio de sesión |
 
 #### Verificar Email
 
@@ -100,6 +102,11 @@ Solicita restablecer la contraseña olvidada del usuario.
   POST /api/v1/forgot-password
 ```
 
+##### Parámetros
+| Tipo     | Nombre      | Descripción              |
+|----------|-------------|--------------------------|
+| `Body`   | `forgotPasswordDto` | Email del usuario |
+
 ##### Ejemplo de solicitud
 
 ```json
@@ -107,11 +114,6 @@ Solicita restablecer la contraseña olvidada del usuario.
     "email": "ricardohuaripatabellido@gmail.com"
 }
 ```
-
-##### Parámetros
-| Tipo     | Nombre      | Descripción              |
-|----------|-------------|--------------------------|
-| `Body`   | `forgotPasswordDto` | Email del usuario |
 
 #### Reiniciar Contraseña
 
