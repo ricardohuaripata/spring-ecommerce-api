@@ -37,6 +37,9 @@ public class Color {
     @Column(length = 6, nullable = false, unique = true)
     private String hexCode;
 
+    @Column(length = 64, nullable = false, unique = true)
+    private String slug;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private Date dateCreated;
 

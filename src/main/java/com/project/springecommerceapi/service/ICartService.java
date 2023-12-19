@@ -13,7 +13,7 @@ public interface ICartService {
 
     CartItem getCartItemById(UUID cartItemId);
 
-    Cart createCartItem(UUID cartId, CartItemDto cartItemDto);
+    Cart addToCart(UUID cartId, CartItemDto cartItemDto);
 
     Cart deleteCartItem(UUID cartItemId);
 

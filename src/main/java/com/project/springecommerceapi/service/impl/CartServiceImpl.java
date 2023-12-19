@@ -54,7 +54,7 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public Cart createCartItem(UUID cartId, CartItemDto cartItemDto) {
+    public Cart addToCart(UUID cartId, CartItemDto cartItemDto) {
 
         Cart cart = getCartById(cartId);
 

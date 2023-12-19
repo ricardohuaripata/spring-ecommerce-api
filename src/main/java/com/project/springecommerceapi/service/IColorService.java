@@ -7,10 +7,12 @@ import com.project.springecommerceapi.dto.ColorDto;
 import com.project.springecommerceapi.entity.Color;
 
 public interface IColorService {
-    
+
     Color getColorById(UUID colorId);
 
     Color getColorByHexcode(String hexcode);
+
+    Color getColorBySlug(String slug);
 
     Color createColor(ColorDto colorDto);
 

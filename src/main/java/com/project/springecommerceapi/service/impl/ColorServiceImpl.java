@@ -14,6 +14,7 @@ import com.project.springecommerceapi.dto.ColorDto;
 import com.project.springecommerceapi.entity.Color;
 import com.project.springecommerceapi.exceptions.ColorNotFoundException;
 import com.project.springecommerceapi.exceptions.HexcodeExistsException;
+import com.project.springecommerceapi.exceptions.SlugExistsException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,23 +37,35 @@ public class ColorServiceImpl implements IColorService {
     }
 
     @Override
+    public Color getColorBySlug(String slug) {
+        return colorRepository.findBySlug(slug).orElseThrow(ColorNotFoundException::new);
+
+    }
+
+    @Override
     public Color createColor(ColorDto colorDto) {
         try {
-            getColorByHexcode(colorDto.getHexcode());
+            getColorBySlug(colorDto.getSlug());
+            throw new SlugExistsException();
 
-            // Si no se lanzó la excepción, significa que el color ya existe
-            throw new HexcodeExistsException();
+        } catch (ColorNotFoundException exception1) {
 
-        } catch (ColorNotFoundException e) {
-            Color newColor = new Color();
+            try {
+                getColorByHexcode(colorDto.getHexcode());
+                throw new HexcodeExistsException();
+            } catch (ColorNotFoundException exception2) {
+                Color newColor = new Color();
 
-            newColor.setTitle(colorDto.getTitle());
-            newColor.setHexCode(colorDto.getHexcode());
-            Date currentDate = new Date();
-            newColor.setDateCreated(currentDate);
-            newColor.setDateLastModified(currentDate);
+                newColor.setTitle(colorDto.getTitle());
+                newColor.setHexCode(colorDto.getHexcode());
+                newColor.setSlug(colorDto.getSlug());
+                Date currentDate = new Date();
+                newColor.setDateCreated(currentDate);
+                newColor.setDateLastModified(currentDate);
 
-            return colorRepository.save(newColor);
+                return colorRepository.save(newColor);
+            }
+
         }
     }
 

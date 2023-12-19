@@ -47,7 +47,7 @@ public class ColorProductVariantServiceImpl implements IColorProductVariantServi
     }
 
     @Override
-    public List<ColorProductVariant> getColorProductVariantsByProduct(UUID productId) {
+    public List<ColorProductVariant> getColorProductVariantsByProductId(UUID productId) {
         Product product = productService.getProductById(productId);
         return colorProductVariantRepository.findColorProductVariantsByProduct(product);
     }
@@ -87,7 +87,7 @@ public class ColorProductVariantServiceImpl implements IColorProductVariantServi
     }
 
     @Override
-    public Page<ColorProductVariant> getColorProductVariantsByProductCategoryPaginate(UUID categoryId, Integer page,
+    public Page<ColorProductVariant> getColorProductVariantsByCategoryIdPaginate(UUID categoryId, Integer page,
             Integer size) {
 
         Category category = categoryService.getCategoryById(categoryId);
@@ -126,6 +126,20 @@ public class ColorProductVariantServiceImpl implements IColorProductVariantServi
 
         return colorProductVariantRepository.save(colorProductVariant);
 
+    }
+
+    @Override
+    public Page<ColorProductVariant> getColorProductVariantsByCategorySlugnamePaginate(String categorySlugname,
+            Integer page, Integer size) {
+        Category category = categoryService.getCategoryBySlug(categorySlugname);
+        return colorProductVariantRepository.findColorProductVariantsByProduct_Category(category,
+                PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "dateCreated")));
+    }
+
+    @Override
+    public List<ColorProductVariant> getColorProductVariantsByProductSlugname(String productSlugname) {
+        Product product = productService.getProductBySlug(productSlugname);
+        return colorProductVariantRepository.findColorProductVariantsByProduct(product);
     }
 
 }

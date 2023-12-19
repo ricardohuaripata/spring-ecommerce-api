@@ -33,9 +33,15 @@ public class CategoryController {
         return new ResponseEntity<>(categoryList, HttpStatus.OK);
     }
 
-    @GetMapping("/{categoryId}")
+    @GetMapping("/id/{categoryId}")
     public ResponseEntity<?> getCategoryById(@PathVariable("categoryId") UUID categoryId) {
         Category categoryToFind = categoryService.getCategoryById(categoryId);
+        return new ResponseEntity<>(categoryToFind, HttpStatus.OK);
+    }
+
+    @GetMapping("/slug/{categorySlugname}")
+    public ResponseEntity<?> getCategoryBySlugname(@PathVariable("categorySlugname") String categorySlugname) {
+        Category categoryToFind = categoryService.getCategoryBySlug(categorySlugname);
         return new ResponseEntity<>(categoryToFind, HttpStatus.OK);
     }
 

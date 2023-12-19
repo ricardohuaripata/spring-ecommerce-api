@@ -12,17 +12,25 @@ import com.project.springecommerceapi.entity.ColorProductVariant;
 
 public interface IColorProductVariantService {
 
-    ColorProductVariant getColorProductVariantById(UUID colorProductVariantId);
+        ColorProductVariant getColorProductVariantById(UUID colorProductVariantId);
 
-    List<ColorProductVariant> getColorProductVariantsByProduct(UUID productId);
+        List<ColorProductVariant> getColorProductVariantsByProductId(UUID productId);
 
-    Page<ColorProductVariant> getColorProductVariantsByProductCategoryPaginate(UUID categoryId, Integer page,
-            Integer size);
+        List<ColorProductVariant> getColorProductVariantsByProductSlugname(String productSlugname);
 
-    ColorProductVariant createColorProductVariant(ColorProductVariantDto colorProductVariantDto, MultipartFile imageFile);
+        Page<ColorProductVariant> getColorProductVariantsByCategorySlugnamePaginate(String categorySlugname,
+                        Integer page,
+                        Integer size);
 
-    ColorProductVariant updateColorProductVariantDetails(UUID colorProductVariantId, UpdateColorProductVariantDto updateColorProductVariantDto);
+        Page<ColorProductVariant> getColorProductVariantsByCategoryIdPaginate(UUID categoryId, Integer page,
+                        Integer size);
 
-    ColorProductVariant updateColorProductVariantMainImage(UUID colorProductVariantId, MultipartFile imageFile);
+        ColorProductVariant createColorProductVariant(ColorProductVariantDto colorProductVariantDto,
+                        MultipartFile imageFile);
+
+        ColorProductVariant updateColorProductVariantDetails(UUID colorProductVariantId,
+                        UpdateColorProductVariantDto updateColorProductVariantDto);
+
+        ColorProductVariant updateColorProductVariantMainImage(UUID colorProductVariantId, MultipartFile imageFile);
 
 }

@@ -49,7 +49,7 @@ public class CartController {
     public ResponseEntity<?> addToCart(
             @ApiParam(value = "ID of the cart", required = true) @PathVariable("cartId") UUID cartId,
             @ApiParam(value = "Product Variant to be added", required = true) @RequestBody @Valid CartItemDto cartItemDto) {
-        Cart cart = cartService.createCartItem(cartId, cartItemDto);
+        Cart cart = cartService.addToCart(cartId, cartItemDto);
         return new ResponseEntity<>(cart, HttpStatus.CREATED);
     }
 

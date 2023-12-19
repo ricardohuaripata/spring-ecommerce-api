@@ -82,17 +82,27 @@ public class ColorProductVariantController {
                 return new ResponseEntity<>(createdColorProductVariant, HttpStatus.CREATED);
         }
 
-        @GetMapping("/product/{productId}")
-        public ResponseEntity<?> getColorProductVariantsByProduct(@PathVariable("productId") UUID productId) {
+        @GetMapping("/product/id/{productId}")
+        public ResponseEntity<?> getColorProductVariantsByProductId(@PathVariable("productId") UUID productId) {
 
                 List<ColorProductVariant> colorProductVariants = colorProductVariantService
-                                .getColorProductVariantsByProduct(productId);
+                                .getColorProductVariantsByProductId(productId);
 
                 return new ResponseEntity<>(colorProductVariants, HttpStatus.OK);
         }
 
-        @GetMapping("/category/{categoryId}")
-        public ResponseEntity<?> getColorProductVariantsByProductCategory(@PathVariable("categoryId") UUID categoryId,
+        @GetMapping("/product/slug/{productSlugname}")
+        public ResponseEntity<?> getColorProductVariantsByProductSlugname(
+                        @PathVariable("productSlugname") String productSlugname) {
+
+                List<ColorProductVariant> colorProductVariants = colorProductVariantService
+                                .getColorProductVariantsByProductSlugname(productSlugname);
+
+                return new ResponseEntity<>(colorProductVariants, HttpStatus.OK);
+        }
+
+        @GetMapping("/category/id/{categoryId}")
+        public ResponseEntity<?> getColorProductVariantsByCategoryId(@PathVariable("categoryId") UUID categoryId,
                         @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
                         @RequestParam(name = "size", required = false, defaultValue = "5") Integer size) {
 
@@ -100,7 +110,22 @@ public class ColorProductVariantController {
                 size = size != null && size > 0 ? size : 5;
 
                 Page<ColorProductVariant> colorProductVariants = colorProductVariantService
-                                .getColorProductVariantsByProductCategoryPaginate(categoryId, page, size);
+                                .getColorProductVariantsByCategoryIdPaginate(categoryId, page, size);
+
+                return new ResponseEntity<>(colorProductVariants, HttpStatus.OK);
+        }
+
+        @GetMapping("/category/slug/{categorySlugname}")
+        public ResponseEntity<?> getColorProductVariantsByCategorySlugname(
+                        @PathVariable("categorySlugname") String categorySlugname,
+                        @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
+                        @RequestParam(name = "size", required = false, defaultValue = "5") Integer size) {
+
+                page = page != null && page >= 0 ? page : 0;
+                size = size != null && size > 0 ? size : 5;
+
+                Page<ColorProductVariant> colorProductVariants = colorProductVariantService
+                                .getColorProductVariantsByCategorySlugnamePaginate(categorySlugname, page, size);
 
                 return new ResponseEntity<>(colorProductVariants, HttpStatus.OK);
         }
