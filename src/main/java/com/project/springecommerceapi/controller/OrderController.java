@@ -32,7 +32,7 @@ public class OrderController {
     @ApiOperation(value = "Get Order by ID", notes = "Get details of a specific order by its ID")
     public ResponseEntity<?> getOrder(
             @ApiParam(value = "ID of the order", required = true) @PathVariable("orderId") UUID orderId) {
-        OrderResponse orderResponse = orderService.getOrder(orderId);
+        OrderResponse orderResponse = orderService.getAuthOrderResponseById(orderId);
         return new ResponseEntity<>(orderResponse, HttpStatus.OK);
     }
 

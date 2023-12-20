@@ -5,19 +5,22 @@ import java.util.UUID;
 import com.project.springecommerceapi.dto.CartItemDto;
 import com.project.springecommerceapi.entity.Cart;
 import com.project.springecommerceapi.entity.CartItem;
+import com.project.springecommerceapi.response.CartResponse;
 
 public interface ICartService {
     Cart getCartById(UUID cartId);
 
-    Cart createCart();
+    CartResponse getCartResponseById(UUID cartId);
+
+    CartResponse createCart();
 
     CartItem getCartItemById(UUID cartItemId);
 
-    Cart addToCart(UUID cartId, CartItemDto cartItemDto);
+    CartResponse addToCart(UUID cartId, CartItemDto cartItemDto);
 
-    Cart deleteCartItem(UUID cartItemId);
+    CartResponse deleteCartItem(UUID cartItemId);
 
-    void clearCart(UUID cartId);
+    CartResponse clearCart(UUID cartId);
 
     int deleteExpiredCarts();
 

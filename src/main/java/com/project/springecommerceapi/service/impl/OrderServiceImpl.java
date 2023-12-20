@@ -31,6 +31,7 @@ import com.project.springecommerceapi.exceptions.VerifiedEmailRequiredException;
 import com.project.springecommerceapi.repository.OrderItemRepository;
 import com.project.springecommerceapi.repository.OrderRepository;
 import com.project.springecommerceapi.repository.SizeColorProductVariantRepository;
+import com.project.springecommerceapi.response.CartResponse;
 import com.project.springecommerceapi.response.OrderResponse;
 import com.project.springecommerceapi.service.IOrderService;
 
@@ -63,41 +64,17 @@ public class OrderServiceImpl implements IOrderService {
     private final EmailServiceImpl emailService;
 
     @Override
-    public OrderResponse getOrder(UUID orderId) {
+    public Order getOrderById(UUID orderId) {
+        return orderRepository.findById(orderId).orElseThrow(OrderNotFoundException::new);
+    }
+
+    @Override
+    public OrderResponse getAuthOrderResponseById(UUID orderId) {
         User authUser = userService.getAuthenticatedUser();
-        Order order = orderRepository.findById(orderId).orElseThrow(OrderNotFoundException::new);
+        Order order = getOrderById(orderId);
         // solo el usuario correspondiente al pedido o un usuario admin
         if (order.getUser().equals(authUser) || authUser.getRole().equals(Role.ROLE_ADMIN.name())) {
-
-            BigDecimal totalAmount = BigDecimal.ZERO; // Inicializar el total en 0
-            int totalItems = 0;
-
-            for (OrderItem item : order.getOrderItems()) {
-                BigDecimal itemPrice = item.getSizeColorProductVariant().getColorProductVariant().getFinalPrice();
-                totalAmount = totalAmount.add(itemPrice); // Sumar el precio del artículo al total
-                totalItems += item.getQuantity();
-            }
-
-            OrderResponse orderResponse = OrderResponse.builder()
-                    .id(order.getId())
-                    .user(order.getUser())
-                    .status(order.getStatus())
-                    .chargeId(order.getChargeId())
-                    .firstName(order.getFirstName())
-                    .lastName(order.getLastName())
-                    .country(order.getCountry())
-                    .city(order.getCity())
-                    .postalCode(order.getPostalCode())
-                    .address(order.getAddress())
-                    .contactPhone(order.getContactPhone())
-                    .orderDate(order.getDateCreated())
-                    .orderItems(order.getOrderItems())
-                    .totalQuantity(totalItems)
-                    .totalAmount(totalAmount)
-                    .build();
-
-            return orderResponse;
-
+            return new OrderResponse(order);
         } else {
             throw new InvalidOperationException();
         }
@@ -107,7 +84,7 @@ public class OrderServiceImpl implements IOrderService {
     public OrderResponse createOrder(OrderDto orderDto) {
         User user = userService.getAuthenticatedUser();
 
-        Cart cart = cartService.getCartById(orderDto.getCartId());
+        CartResponse cart = cartService.getCartResponseById(orderDto.getCartId());
         List<CartItem> itemList = cart.getCartItems();
 
         if (itemList == null || itemList.isEmpty()) {
@@ -118,14 +95,8 @@ public class OrderServiceImpl implements IOrderService {
             throw new VerifiedEmailRequiredException();
         }
 
-        BigDecimal totalAmount = BigDecimal.ZERO; // Inicializar el total en 0
-        int totalItems = 0;
-
-        for (CartItem item : itemList) {
-            BigDecimal itemPrice = item.getSizeColorProductVariant().getColorProductVariant().getFinalPrice();
-            totalAmount = totalAmount.add(itemPrice); // Sumar el precio del artículo al total
-            totalItems += item.getQuantity();
-        }
+        BigDecimal totalAmount = cart.getTotalAmount();
+        int totalItems = cart.getTotalQuantity();
 
         // Crear la transacción en Stripe
 
@@ -193,25 +164,11 @@ public class OrderServiceImpl implements IOrderService {
 
         }
 
-        cartService.clearCart(cart.getId());
+        createdOrder.setOrderItems(createdOrderItems);
 
-        OrderResponse orderResponse = OrderResponse.builder()
-                .id(createdOrder.getId())
-                .user(createdOrder.getUser())
-                .status(createdOrder.getStatus())
-                .chargeId(createdOrder.getChargeId())
-                .firstName(createdOrder.getFirstName())
-                .lastName(createdOrder.getLastName())
-                .country(createdOrder.getCountry())
-                .city(createdOrder.getCity())
-                .postalCode(createdOrder.getPostalCode())
-                .address(createdOrder.getAddress())
-                .contactPhone(createdOrder.getContactPhone())
-                .orderDate(createdOrder.getDateCreated())
-                .orderItems(createdOrderItems)
-                .totalQuantity(totalItems)
-                .totalAmount(totalAmount)
-                .build();
+        cartService.clearCart(cart.getId()); // Vaciar carrito del usuario
+
+        OrderResponse orderResponse = new OrderResponse(createdOrder);
         // Enviar resumen del pedido al email del usuario
         String emailSuccessfulOrder = emailService.buildOrderSuccessDetailsMail(orderResponse);
         emailService.send(user.getEmail(), AppConstants.SUCCESSFUL_ORDER, emailSuccessfulOrder);
