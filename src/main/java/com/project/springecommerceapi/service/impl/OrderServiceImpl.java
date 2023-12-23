@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.springecommerceapi.common.AppConstants;
 import com.project.springecommerceapi.dto.OrderDto;
-import com.project.springecommerceapi.entity.Cart;
 import com.project.springecommerceapi.entity.CartItem;
 import com.project.springecommerceapi.entity.Order;
 import com.project.springecommerceapi.entity.OrderItem;

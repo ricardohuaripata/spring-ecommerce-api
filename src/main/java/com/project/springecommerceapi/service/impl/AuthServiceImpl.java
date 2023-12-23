@@ -53,7 +53,7 @@ public class AuthServiceImpl implements IAuthService {
             // está cogido
             throw new EmailExistsException();
 
-        } catch (UserNotFoundException e) {
+        } catch (UserNotFoundException e) { 
             User newUser = new User();
             newUser.setEmail(signupDto.getEmail());
             newUser.setPassword(passwordEncoder.encode(signupDto.getPassword()));
@@ -65,6 +65,7 @@ public class AuthServiceImpl implements IAuthService {
             newUser.setDateLastModified(currentDate);
             newUser.setRole(Role.ROLE_USER.name());
             User savedUser = userRepository.save(newUser);
+
             UserPrincipal userPrincipal = new UserPrincipal(savedUser);
 
             String emailVerifyMail = emailService.buildEmailVerifyMail(

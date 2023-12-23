@@ -5,7 +5,6 @@ import com.project.springecommerceapi.entity.Order;
 import com.project.springecommerceapi.entity.OrderItem;
 import com.project.springecommerceapi.entity.User;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 

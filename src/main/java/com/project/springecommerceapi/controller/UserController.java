@@ -12,17 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.springecommerceapi.common.AppConstants;
 import com.project.springecommerceapi.dto.ShippingAddressDto;
-import com.project.springecommerceapi.dto.UpdateColorProductVariantDto;
 import com.project.springecommerceapi.dto.UpdateShippingAddressDto;
 import com.project.springecommerceapi.dto.UpdateUserDto;
-import com.project.springecommerceapi.entity.ColorProductVariant;
 import com.project.springecommerceapi.entity.ShippingAddress;
 import com.project.springecommerceapi.entity.User;
 import com.project.springecommerceapi.response.SuccessResponse;

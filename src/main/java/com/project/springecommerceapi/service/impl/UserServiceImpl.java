@@ -17,7 +17,6 @@ import com.project.springecommerceapi.service.IUserService;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class UserServiceImpl implements IUserService {
     private final UserRepository userRepository;
@@ -39,6 +38,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional
     public User updateAuthenticatedUserDetails(UpdateUserDto updateUserDto) {
         User authUser = getAuthenticatedUser();
         mapstructMapperUserUpdate.updateUserFromUpdateUserDto(

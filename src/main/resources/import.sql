@@ -27,14 +27,14 @@ INSERT INTO public.categories (id, date_created, date_last_modified, featured_im
 
 -- COLORS
 
-INSERT INTO public.colors (id, date_created, date_last_modified, hex_code, slug, title) VALUES ('0c912c8b-6129-4292-9da4-5fbc6dc24682', '2023-11-16 02:08:15.211', '2023-11-16 02:08:15.211', '000000', 'black', 'negro');
-INSERT INTO public.colors (id, date_created, date_last_modified, hex_code, slug, title) VALUES ('890e6b76-c264-4520-b70e-d564c62096f8', '2023-11-16 02:08:36.493', '2023-11-16 02:08:36.493', 'FFFFFF', 'white', 'blanco');
-INSERT INTO public.colors (id, date_created, date_last_modified, hex_code, slug, title) VALUES ('7d74d59a-7799-4d64-a7ea-5bf011601dc9', '2023-11-16 02:09:09.147', '2023-11-16 02:09:09.147', 'FF0000', 'red', 'rojo');
-INSERT INTO public.colors (id, date_created, date_last_modified, hex_code, slug, title) VALUES ('809b79d0-f039-4f34-bfcc-d6580058a8e4', '2023-11-16 02:09:48.343', '2023-11-16 02:09:48.343', '026F00', 'green', 'verde');
-INSERT INTO public.colors (id, date_created, date_last_modified, hex_code, slug, title) VALUES ('a80f8f95-a023-43f0-bb7b-00c6b4f656a9', '2023-11-16 02:10:04.257', '2023-11-16 02:10:04.257', '0005B0', 'blue', 'azul');
-INSERT INTO public.colors (id, date_created, date_last_modified, hex_code, slug, title) VALUES ('a20f9468-53c2-4d8d-9941-ceb5c87c1de8', '2023-11-16 02:10:59.47', '2023-11-16 02:10:59.47', 'EDF028', 'yellow', 'amarillo');
-INSERT INTO public.colors (id, date_created, date_last_modified, hex_code, slug, title) VALUES ('8214a81f-57d2-4665-aab1-fbd15180e679', '2023-11-16 02:11:46.053', '2023-11-16 02:11:46.053', '28F0F0', 'turquoise', 'turquesa');
-INSERT INTO public.colors (id, date_created, date_last_modified, hex_code, slug, title) VALUES ('0b52d326-d9b1-43be-9c78-c79f7a4eb888', '2023-11-16 02:21:33.804', '2023-11-16 02:21:33.804', 'C5C5C5', 'grey', 'gris');
+INSERT INTO public.colors (id, date_created, date_last_modified, hex_code, slug, title) VALUES ('0c912c8b-6129-4292-9da4-5fbc6dc24682', '2023-11-16 02:08:15.211', '2023-11-16 02:08:15.211', '000000', 'black', 'Black');
+INSERT INTO public.colors (id, date_created, date_last_modified, hex_code, slug, title) VALUES ('890e6b76-c264-4520-b70e-d564c62096f8', '2023-11-16 02:08:36.493', '2023-11-16 02:08:36.493', 'FFFFFF', 'white', 'White');
+INSERT INTO public.colors (id, date_created, date_last_modified, hex_code, slug, title) VALUES ('7d74d59a-7799-4d64-a7ea-5bf011601dc9', '2023-11-16 02:09:09.147', '2023-11-16 02:09:09.147', 'FF0000', 'red', 'Red');
+INSERT INTO public.colors (id, date_created, date_last_modified, hex_code, slug, title) VALUES ('809b79d0-f039-4f34-bfcc-d6580058a8e4', '2023-11-16 02:09:48.343', '2023-11-16 02:09:48.343', '026F00', 'green', 'Green');
+INSERT INTO public.colors (id, date_created, date_last_modified, hex_code, slug, title) VALUES ('a80f8f95-a023-43f0-bb7b-00c6b4f656a9', '2023-11-16 02:10:04.257', '2023-11-16 02:10:04.257', '0005B0', 'blue', 'Blue');
+INSERT INTO public.colors (id, date_created, date_last_modified, hex_code, slug, title) VALUES ('a20f9468-53c2-4d8d-9941-ceb5c87c1de8', '2023-11-16 02:10:59.47', '2023-11-16 02:10:59.47', 'EDF028', 'yellow', 'Yellow');
+INSERT INTO public.colors (id, date_created, date_last_modified, hex_code, slug, title) VALUES ('8214a81f-57d2-4665-aab1-fbd15180e679', '2023-11-16 02:11:46.053', '2023-11-16 02:11:46.053', '28F0F0', 'turquoise', 'Turquoise');
+INSERT INTO public.colors (id, date_created, date_last_modified, hex_code, slug, title) VALUES ('0b52d326-d9b1-43be-9c78-c79f7a4eb888', '2023-11-16 02:21:33.804', '2023-11-16 02:21:33.804', 'C5C5C5', 'grey', 'Grey');
 
 -- PRODUCTOS
 

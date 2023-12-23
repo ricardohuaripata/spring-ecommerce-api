@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.springecommerceapi.dto.CartItemDto;
-import com.project.springecommerceapi.entity.Cart;
 import com.project.springecommerceapi.response.CartResponse;
 import com.project.springecommerceapi.response.SuccessResponse;
 import com.project.springecommerceapi.service.impl.CartServiceImpl;

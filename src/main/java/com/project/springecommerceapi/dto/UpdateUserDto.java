@@ -1,6 +1,5 @@
 package com.project.springecommerceapi.dto;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
