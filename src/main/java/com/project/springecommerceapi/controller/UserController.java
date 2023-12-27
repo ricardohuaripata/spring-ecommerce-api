@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.springecommerceapi.common.AppConstants;
 import com.project.springecommerceapi.dto.ShippingAddressDto;
+import com.project.springecommerceapi.dto.UpdatePasswordDto;
 import com.project.springecommerceapi.dto.UpdateShippingAddressDto;
 import com.project.springecommerceapi.dto.UpdateUserDto;
 import com.project.springecommerceapi.entity.ShippingAddress;
@@ -59,6 +60,13 @@ public class UserController {
 
         User updatedUser = userService.updateAuthenticatedUserDetails(updateUserDto);
 
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
+
+    @PatchMapping("/account/password")
+    @ApiOperation(value = "Update User Password", notes = "Update authenticated user password")
+    public ResponseEntity<?> updateUserPassword(@RequestBody @Valid UpdatePasswordDto updatePasswordDto) {
+        User updatedUser = userService.updatePassword(updatePasswordDto);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 

@@ -37,6 +37,7 @@ import com.project.springecommerceapi.exceptions.FileUploadException;
 import com.project.springecommerceapi.exceptions.NoItemsToPayException;
 import com.project.springecommerceapi.exceptions.HexcodeExistsException;
 import com.project.springecommerceapi.exceptions.InvalidImageFileException;
+import com.project.springecommerceapi.exceptions.InvalidOldPasswordException;
 import com.project.springecommerceapi.exceptions.InvalidOperationException;
 import com.project.springecommerceapi.exceptions.InvalidTokenException;
 import com.project.springecommerceapi.exceptions.NotEnoughStockException;
@@ -93,12 +94,13 @@ public class CustomExceptionHandler {
         return errorResponseResponseEntity;
     }
     /*
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleInternalServerError(Exception e) {
-        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, AppConstants.INTERNAL_SERVER_ERROR, null);
-    }
-    */
-    
+     * @ExceptionHandler(Exception.class)
+     * public ResponseEntity<ErrorResponse> handleInternalServerError(Exception e) {
+     * return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR,
+     * AppConstants.INTERNAL_SERVER_ERROR, null);
+     * }
+     */
+
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ErrorResponse> handleAccessDeniedException(AccessDeniedException e) {
         return buildErrorResponse(HttpStatus.UNAUTHORIZED, AppConstants.ACCESS_DENIED, null);
@@ -273,6 +275,11 @@ public class CustomExceptionHandler {
     @ExceptionHandler(FileUploadException.class)
     public ResponseEntity<ErrorResponse> handleFileUploadException(FileUploadException e) {
         return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, AppConstants.FILE_UPLOAD_FAILED, null);
+    }
+
+    @ExceptionHandler(InvalidOldPasswordException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidOldPasswordException(InvalidOldPasswordException e) {
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.INVALID_OLD_PASSWORD, null);
     }
 
 }

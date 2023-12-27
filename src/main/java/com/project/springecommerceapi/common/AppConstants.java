@@ -54,5 +54,6 @@ public class AppConstants {
     public static final String SUCCESSFUL_ORDER = "Thanks for your purchase";
     public static final String INVALID_IMAGE_FILE = "Invalid file type, only (jpeg, jpg, png) will be supported.";
     public static final String FILE_UPLOAD_FAILED = "Something went wrong when trying to upload a file.";
+    public static final String INVALID_OLD_PASSWORD = "The old password is not valid.";
 
 }
