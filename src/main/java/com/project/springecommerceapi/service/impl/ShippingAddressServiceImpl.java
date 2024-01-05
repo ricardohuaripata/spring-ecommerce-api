@@ -12,6 +12,7 @@ import com.project.springecommerceapi.dto.UpdateShippingAddressDto;
 import com.project.springecommerceapi.entity.ShippingAddress;
 import com.project.springecommerceapi.entity.User;
 import com.project.springecommerceapi.exceptions.InvalidOperationException;
+import com.project.springecommerceapi.exceptions.ShippingAddressNotFoundException;
 import com.project.springecommerceapi.mapper.MapstructMapperShippingAddressUpdate;
 import com.project.springecommerceapi.repository.ShippingAddressRepository;
 import com.project.springecommerceapi.service.IShippingAddressService;
@@ -28,7 +29,7 @@ public class ShippingAddressServiceImpl implements IShippingAddressService {
 
     @Override
     public ShippingAddress getShippingAddressById(UUID shippingAddressId) {
-        return shippingAddressRepository.findById(shippingAddressId).orElseThrow(null);
+        return shippingAddressRepository.findById(shippingAddressId).orElseThrow(ShippingAddressNotFoundException::new);
     }
 
     @Override

@@ -23,7 +23,16 @@ public class OrderDto {
     private UUID cartId;
 
     @NotBlank
-    private String cardToken;
+    private String cardNumber;
+
+    @NotNull
+    private String expMonth;
+
+    @NotNull
+    private String expYear;
+
+    @NotBlank
+    private String cvc;
 
     @NotBlank
     @Size(max = 64)

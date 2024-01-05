@@ -37,6 +37,7 @@ public class AppConstants {
     public static final String CART_ITEM_NOT_FOUND = "No cart item found.";
     public static final String ORDER_NOT_FOUND = "No order found.";
     public static final String PRODUCT_IMAGE_NOT_FOUND = "No product image found.";
+    public static final String SHIPPING_ADDRESS_NOT_FOUND = "No shipping address found.";
 
     public static final String EMAIL_EXISTS = "User exists with this email address.";
     public static final String SLUG_EXISTS = "Slug already exists.";
@@ -55,5 +56,6 @@ public class AppConstants {
     public static final String INVALID_IMAGE_FILE = "Invalid file type, only (jpeg, jpg, png) will be supported.";
     public static final String FILE_UPLOAD_FAILED = "Something went wrong when trying to upload a file.";
     public static final String INVALID_OLD_PASSWORD = "The old password is not valid.";
+    public static final String INVALID_CARD_CREDENTIALS = "Card credentials are not valid.";
 
 }

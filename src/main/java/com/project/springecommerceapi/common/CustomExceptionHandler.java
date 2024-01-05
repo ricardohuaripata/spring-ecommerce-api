@@ -36,6 +36,7 @@ import com.project.springecommerceapi.exceptions.EmailExistsException;
 import com.project.springecommerceapi.exceptions.FileUploadException;
 import com.project.springecommerceapi.exceptions.NoItemsToPayException;
 import com.project.springecommerceapi.exceptions.HexcodeExistsException;
+import com.project.springecommerceapi.exceptions.InvalidCardCredentialsException;
 import com.project.springecommerceapi.exceptions.InvalidImageFileException;
 import com.project.springecommerceapi.exceptions.InvalidOldPasswordException;
 import com.project.springecommerceapi.exceptions.InvalidOperationException;
@@ -45,6 +46,7 @@ import com.project.springecommerceapi.exceptions.OrderNotFoundException;
 import com.project.springecommerceapi.exceptions.PaymentTransactionFailedException;
 import com.project.springecommerceapi.exceptions.ProductImageNotFoundException;
 import com.project.springecommerceapi.exceptions.ProductNotFoundException;
+import com.project.springecommerceapi.exceptions.ShippingAddressNotFoundException;
 import com.project.springecommerceapi.exceptions.SizeColorProductVariantExistsException;
 import com.project.springecommerceapi.exceptions.SizeColorProductVariantNotFoundException;
 import com.project.springecommerceapi.exceptions.SlugExistsException;
@@ -199,6 +201,11 @@ public class CustomExceptionHandler {
         return buildErrorResponse(HttpStatus.NOT_FOUND, AppConstants.PRODUCT_IMAGE_NOT_FOUND, null);
     }
 
+    @ExceptionHandler(ShippingAddressNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleShippingAddressNotFoundException(ShippingAddressNotFoundException e) {
+        return buildErrorResponse(HttpStatus.NOT_FOUND, AppConstants.SHIPPING_ADDRESS_NOT_FOUND, null);
+    }
+
     // EXISTS EXCEPTIONS
 
     @ExceptionHandler(EmailExistsException.class)
@@ -280,6 +287,11 @@ public class CustomExceptionHandler {
     @ExceptionHandler(InvalidOldPasswordException.class)
     public ResponseEntity<ErrorResponse> handleInvalidOldPasswordException(InvalidOldPasswordException e) {
         return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.INVALID_OLD_PASSWORD, null);
+    }
+
+    @ExceptionHandler(InvalidCardCredentialsException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidCardCredentialsException(InvalidCardCredentialsException e) {
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, AppConstants.INVALID_CARD_CREDENTIALS, null);
     }
 
 }

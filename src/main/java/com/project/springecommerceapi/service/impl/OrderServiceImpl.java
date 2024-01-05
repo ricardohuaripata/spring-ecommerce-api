@@ -22,6 +22,7 @@ import com.project.springecommerceapi.entity.OrderItem;
 import com.project.springecommerceapi.entity.SizeColorProductVariant;
 import com.project.springecommerceapi.entity.User;
 import com.project.springecommerceapi.enumeration.Role;
+import com.project.springecommerceapi.exceptions.InvalidCardCredentialsException;
 import com.project.springecommerceapi.exceptions.InvalidOperationException;
 import com.project.springecommerceapi.exceptions.NoItemsToPayException;
 import com.project.springecommerceapi.exceptions.OrderNotFoundException;
@@ -39,7 +40,9 @@ import lombok.RequiredArgsConstructor;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
+import com.stripe.model.Token;
 import com.stripe.param.ChargeCreateParams;
+import com.stripe.param.TokenCreateParams;
 
 @Service
 @Transactional
@@ -94,6 +97,8 @@ public class OrderServiceImpl implements IOrderService {
             throw new VerifiedEmailRequiredException();
         }
 
+        String cardToken = generateCardToken(orderDto); // Generar token con las credenciales de la tarjeta
+
         BigDecimal totalAmount = cart.getTotalAmount();
         int totalItems = cart.getTotalQuantity();
 
@@ -112,7 +117,7 @@ public class OrderServiceImpl implements IOrderService {
         ChargeCreateParams params = ChargeCreateParams.builder()
                 .setAmount(totalAmount.multiply(new BigDecimal(100)).longValue())
                 .setCurrency("eur")
-                .setSource(orderDto.getCardToken())
+                .setSource(cardToken)
                 .setDescription("Transacción de pago por valor de " + totalAmount + " por la compra de " + totalItems
                         + " artículos.")
                 .setMetadata(metadata)
@@ -175,4 +180,30 @@ public class OrderServiceImpl implements IOrderService {
         return orderResponse;
     }
 
+    private String generateCardToken(OrderDto orderDto) {
+
+        String cardNumber = orderDto.getCardNumber();
+        String expMonth = orderDto.getExpMonth();
+        String expYear = orderDto.getExpYear();
+        String cvc = orderDto.getCvc();
+
+        TokenCreateParams params = TokenCreateParams.builder()
+                .setCard(
+                        TokenCreateParams.Card.builder()
+                                .setNumber(cardNumber)
+                                .setExpMonth(expMonth)
+                                .setExpYear(expYear)
+                                .setCvc(cvc)
+                                .build())
+                .build();
+
+        try {
+            Token token = Token.create(params);
+            return token.getId();
+
+        } catch (StripeException e) {
+            throw new InvalidCardCredentialsException();
+        }
+
+    }
 }
