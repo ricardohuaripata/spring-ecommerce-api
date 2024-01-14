@@ -26,6 +26,8 @@ Este proyecto es una API REST desarrollada en Spring Boot que ofrece funcionalid
 
 **Stripe Java:** Biblioteca para interactuar con la API de Stripe, utilizada para procesar pagos.
 
+**Amazon S3:** Servicio de almacenamiento en la nube que permite la subida y gestión de imágenes u otros archivos.
+
 ## Database Diagram
 
 ![alt text](database-diagram.png)
@@ -39,7 +41,7 @@ Este proyecto es una API REST desarrollada en Spring Boot que ofrece funcionalid
 Registra un nuevo usuario.
 
 ```http
-  GET /api/v1/signup
+  GET /api/v1/auth/signup
 ```
 
 ##### Parámetros
@@ -64,7 +66,7 @@ Registra un nuevo usuario.
 Inicia sesión para obtener un token de autenticación.
 
 ```http
-  POST /api/v1/login
+  POST /api/v1/auth/login
 ```
 
 ##### Parámetros
@@ -86,7 +88,7 @@ Inicia sesión para obtener un token de autenticación.
 Verifica el correo electrónico del usuario utilizando un token de verificación de email.
 
 ```http
-  POST /api/v1/verify-email/{token}
+  POST /api/v1/auth/verify-email/{token}
 ```
 
 ##### Parámetros
@@ -94,12 +96,27 @@ Verifica el correo electrónico del usuario utilizando un token de verificación
 |----------|-------------|--------------------------|
 | `Path`   | `token` | Token de verificación de email |
 
+##### Ejemplo de solicitud
+
+```json
+{
+    "id": "07ea76e0-142f-499a-929f-bedb08c79624",
+    "email": "ricardohuaripatabellido@gmail.com",
+    "firstName": "Ricardo",
+    "lastName": "Huaripata",
+    "role": "ROLE_USER",
+    "emailVerified": true,
+    "dateCreated": "15-11-2023 18:56:01",
+    "dateLastModified": "20-11-2023 00:33:21"
+}
+```
+
 #### Olvidé mi Contraseña
 
 Solicita restablecer la contraseña olvidada del usuario.
 
 ```http
-  POST /api/v1/forgot-password
+  POST /api/v1/auth/forgot-password
 ```
 
 ##### Parámetros
@@ -115,12 +132,21 @@ Solicita restablecer la contraseña olvidada del usuario.
 }
 ```
 
+##### Ejemplo de respuesta
+
+```json
+{
+    "message": "Please, check your email.",
+    "timestamp": "19-11-2023 21:26:39"
+}
+```
+
 #### Reiniciar Contraseña
 
 Restablece la contraseña del usuario utilizando un token de restablecimiento de contraseña.
 
 ```http
-  POST /api/v1/reset-password/{token}
+  POST /api/v1/auth/reset-password/{token}
 ```
 
 ##### Parámetros
@@ -136,6 +162,70 @@ Restablece la contraseña del usuario utilizando un token de restablecimiento de
 {
     "password": "RicardoDev.12",
     "passwordRepeat": "RicardoDev.12"
+}
+```
+
+#### Añadir dirección de envío
+
+Permite añadir una dirección de envio a la lista de direcciones del usuario.
+
+```http
+  POST /api/v1/user/account/shipping-address
+```
+
+##### Parámetros
+| Tipo     | Nombre      | Descripción              |
+|----------|-------------|--------------------------|
+| `Body`   | `shippingAddressDto` | Datos de la dirección |
+
+##### Ejemplo de solicitud
+
+```json
+{
+    "firstName": "Ricardo",
+    "lastName": "Huaripata",
+    "country": "España",
+    "city": "Málaga",
+    "postalCode": "49023",
+    "address": "Calle Vergara, Nº 13, 2ºA",
+    "contactPhone": "67040813"
+}
+```
+
+#### Actualizar detalles del usuario
+
+Permite actualizar detalles del usuario.
+
+```http
+  PATCH /api/v1/user/account/details
+```
+
+##### Parámetros
+| Tipo     | Nombre      | Descripción              |
+|----------|-------------|--------------------------|
+| `Body`   | `UpdateUserDto` | Datos del usuario para actualizar |
+
+##### Ejemplo de solicitud
+
+```json
+{
+    "firstName": "Nombre actualizado",
+    "lastName": "Apellido actualizado"
+}
+```
+
+##### Ejemplo de respuesta
+
+```json
+{
+    "id": "07ea76e0-142f-499a-929f-bedb08c79624",
+    "email": "ricardohuaripatabellido@gmail.com",
+    "firstName": "Nombre actualizado",
+    "lastName": "Apellido actualizado",
+    "role": "ROLE_USER",
+    "emailVerified": false,
+    "dateCreated": "15-11-2023 18:56:01",
+    "dateLastModified": "08-12-2023 21:54:59"
 }
 ```
 
@@ -174,7 +264,7 @@ Obtiene información sobre un carrito específico.
                         "id": "2d271f27-f6be-4357-bac1-f92289cb2ddc",
                         "title": "FATALITY - Hoodie",
                         "slug": "fatality-hoodie",
-                        "description": "Ssfasfxawqeuwieuwiesxnvkzas.",
+                        "description": "Esto es una descripcion.",
                         "category": {
                             "id": "dad347c3-7ea6-457e-9bf4-b8b3f976c812",
                             "title": "LOS CLÁSICOS",
@@ -188,15 +278,16 @@ Obtiene información sobre un carrito específico.
                     },
                     "color": {
                         "id": "890e6b76-c264-4520-b70e-d564c62096f8",
-                        "title": "blanco",
+                        "title": "White",
                         "hexCode": "FFFFFF",
+                        "slug": "white",
                         "dateCreated": "16-11-2023 01:08:36",
                         "dateLastModified": "16-11-2023 01:08:36"
                     },
                     "basePrice": 42.99,
                     "finalPrice": 42.99,
-                    "frontImageUrl": "https://image-url.jpg",
-                    "backImageUrl": "https://image-url.jpg",
+                    "mainImageUrl": "https://image-url.jpg",
+                    "productImageList": [],
                     "dateCreated": "16-11-2023 15:51:06",
                     "dateLastModified": "16-11-2023 15:51:06"
                 },
@@ -206,7 +297,9 @@ Obtiene información sobre un carrito específico.
                 "dateLastModified": "16-11-2023 18:09:40"
             }
         }
-    ]
+    ],
+    "totalAmount": 85.98,
+    "totalQuantity": 2
 }
 ```
 
@@ -226,7 +319,9 @@ Crea un nuevo carrito de compras.
     "dateCreated": "17-11-2023 01:53:14",
     "dateLastModified": "17-11-2023 01:53:14",
     "dateExpiration": "15-12-2023 01:53:14",
-    "cartItems": []
+    "cartItems": [],
+    "totalAmount": 0,
+    "totalQuantity": 0
 }
 ```
 
@@ -302,8 +397,8 @@ Obtiene detalles de un pedido específico por su ID.
     },
     "status": "pending",
     "chargeId": "ch_3OFLqXEARNZfy9ac1W7bWZgh",
-    "firstname": "Ricardo",
-    "lastname": "Huaripata",
+    "firstName": "Ricardo",
+    "lastName": "Huaripata",
     "country": "España",
     "city": "Málaga",
     "postalCode": "49023",
@@ -335,15 +430,16 @@ Obtiene detalles de un pedido específico por su ID.
                     },
                     "color": {
                         "id": "0c912c8b-6129-4292-9da4-5fbc6dc24682",
-                        "title": "negro",
+                        "title": "Black",
                         "hexCode": "000000",
+                        "slug": "black",
                         "dateCreated": "16-11-2023 01:08:15",
                         "dateLastModified": "16-11-2023 01:08:15"
                     },
                     "basePrice": 42.99,
                     "finalPrice": 42.99,
-                    "frontImageUrl": "https://image-url.jpg",
-                    "backImageUrl": "https://image-url.jpg",
+                    "mainImageUrl": "https://image-url.jpg",
+                    "productImageList": [],
                     "dateCreated": "16-11-2023 15:55:53",
                     "dateLastModified": "16-11-2023 15:55:53"
                 },
@@ -379,7 +475,10 @@ Crea un nuevo pedido.
 ```json
 {
     "cartId": "52f1839a-a010-4ccd-922d-e990cfa530f3",
-    "cardToken": "tok_visa",
+    "cardNumber": "4242424242424242",
+    "expMonth": "05",
+    "expYear": "28",
+    "cvc": "333",    
     "firstName": "Ricardo",
     "lastName": "Huaripata",
     "country": "España",

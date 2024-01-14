@@ -53,7 +53,7 @@ public class AuthServiceImpl implements IAuthService {
             // está cogido
             throw new EmailExistsException();
 
-        } catch (UserNotFoundException e) { 
+        } catch (UserNotFoundException e) {
             User newUser = new User();
             newUser.setEmail(signupDto.getEmail());
             newUser.setPassword(passwordEncoder.encode(signupDto.getPassword()));
@@ -93,7 +93,14 @@ public class AuthServiceImpl implements IAuthService {
 
     @Override
     public User verifyEmail(String token) {
-        String targetEmail = jwtTokenService.getSubjectFromToken(token);
+        String targetEmail = "";
+
+        try {
+            targetEmail = jwtTokenService.getSubjectFromToken(token);
+        } catch (Exception e) {
+            throw new InvalidTokenException();
+
+        }
 
         if (jwtTokenService.isTokenValid(targetEmail, token, TokenType.EMAIL_VERIFICATION_TOKEN) == false) {
             throw new InvalidTokenException();
@@ -119,7 +126,14 @@ public class AuthServiceImpl implements IAuthService {
 
     @Override
     public User resetPassword(String token, ResetPasswordDto resetPasswordDto) {
-        String targetEmail = jwtTokenService.getSubjectFromToken(token);
+        String targetEmail = "";
+
+        try {
+            targetEmail = jwtTokenService.getSubjectFromToken(token);
+        } catch (Exception e) {
+            throw new InvalidTokenException();
+
+        }
 
         if (jwtTokenService.isTokenValid(targetEmail, token, TokenType.PASSWORD_RESET_TOKEN) == false) {
             throw new InvalidTokenException();

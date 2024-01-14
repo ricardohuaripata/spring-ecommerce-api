@@ -16,6 +16,7 @@ import com.project.springecommerceapi.service.impl.OrderServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.validation.Valid;
@@ -34,6 +35,13 @@ public class OrderController {
             @ApiParam(value = "ID of the order", required = true) @PathVariable("orderId") UUID orderId) {
         OrderResponse orderResponse = orderService.getAuthOrderResponseById(orderId);
         return new ResponseEntity<>(orderResponse, HttpStatus.OK);
+    }
+
+    @GetMapping()
+    @ApiOperation(value = "Get Auth User Orders", notes = "Get all orders from a authenticated user")
+    public ResponseEntity<?> getAuthUserOrders() {
+        List<OrderResponse> orderResponseList = orderService.getAuthOrders();
+        return new ResponseEntity<>(orderResponseList, HttpStatus.OK);
     }
 
     @PostMapping()

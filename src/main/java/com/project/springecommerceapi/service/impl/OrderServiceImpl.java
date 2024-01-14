@@ -65,8 +65,7 @@ public class OrderServiceImpl implements IOrderService {
     private final UserServiceImpl userService;
     private final EmailServiceImpl emailService;
 
-    @Override
-    public Order getOrderById(UUID orderId) {
+    private Order getOrderById(UUID orderId) {
         return orderRepository.findById(orderId).orElseThrow(OrderNotFoundException::new);
     }
 
@@ -80,6 +79,20 @@ public class OrderServiceImpl implements IOrderService {
         } else {
             throw new InvalidOperationException();
         }
+    }
+
+    @Override
+    public List<OrderResponse> getAuthOrders() {
+        User authUser = userService.getAuthenticatedUser();
+
+        List<Order> orderList = orderRepository.findOrdersByUser(authUser);
+        List<OrderResponse> orderResponseList = new ArrayList<OrderResponse>();
+
+        for (Order order : orderList) {
+            orderResponseList.add(new OrderResponse(order));
+        }
+        
+        return orderResponseList;
     }
 
     @Override
@@ -206,4 +219,5 @@ public class OrderServiceImpl implements IOrderService {
         }
 
     }
+
 }
