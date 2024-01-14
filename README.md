@@ -1,7 +1,8 @@
 
 # Ecommerce RESTful API
 
-Este proyecto es una API REST desarrollada en Spring Boot que ofrece funcionalidades para un ecommerce de ropa. Permite gestionar productos, pedidos, usuarios y autenticación, entre otras características.
+Este proyecto es una API REST desarrollada en Spring Boot que ofrece funcionalidades para una tienda online de ropa. Permite gestionar productos, pedidos, usuarios y autenticación, entre otras características.
+
 ## Tecnologías Utilizadas
 
 **Spring Boot:** Plataforma de aplicación Java para crear aplicaciones independientes basadas en Spring.
@@ -96,7 +97,7 @@ Verifica el correo electrónico del usuario utilizando un token de verificación
 |----------|-------------|--------------------------|
 | `Path`   | `token` | Token de verificación de email |
 
-##### Ejemplo de solicitud
+##### Ejemplo de respuesta
 
 ```json
 {
@@ -165,7 +166,7 @@ Restablece la contraseña del usuario utilizando un token de restablecimiento de
 }
 ```
 
-#### Añadir dirección de envío
+#### Añadir dirección de envío (Requiere autenticación)
 
 Permite añadir una dirección de envio a la lista de direcciones del usuario.
 
@@ -192,7 +193,7 @@ Permite añadir una dirección de envio a la lista de direcciones del usuario.
 }
 ```
 
-#### Actualizar detalles del usuario
+#### Actualizar detalles del usuario (Requiere autenticación)
 
 Permite actualizar detalles del usuario.
 
