@@ -1,7 +1,7 @@
 
-# Ecommerce RESTful API
+# Spring Ecommerce API
 
-Este proyecto es una API REST desarrollada en Spring Boot que ofrece funcionalidades para una tienda online de ropa. Permite gestionar productos, pedidos, usuarios y autenticación, entre otras características.
+REST API desarrollado con Spring Boot que ofrece funcionalidades para un ecommerce de ropa. Permite gestionar productos, pedidos, usuarios y autenticación, entre otras características.
 
 ## Tecnologías Utilizadas
 
